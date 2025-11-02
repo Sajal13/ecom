@@ -1,0 +1,13 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "files.exclude": {
+    "apps/web": false
+  },
+  "cSpell.words": [
+    "Roboto"
+  ]
+}
