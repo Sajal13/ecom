@@ -24,8 +24,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({
   startIcon,
   endIcon,
-  color = 'primary',
-  variant = 'filled',
+  color = 'neutral',
+  variant = 'text',
   size = 'medium',
   type = 'button',
   shape,

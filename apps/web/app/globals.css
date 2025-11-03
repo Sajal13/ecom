@@ -1,79 +1,89 @@
 @import 'tailwindcss';
 
 @theme {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  /* PRIMARY (Black Scale) */
-  --color-primary-50: #f6f6f6;
-  --color-primary-100: #e7e7e7;
-  --color-primary-200: #c8c8c8;
-  --color-primary-300: #a3a3a3;
-  --color-primary-400: #7f7f7f;
-  --color-primary-500: #555555;
-  --color-primary-600: #3f3f3f;
-  --color-primary-700: #2b2b2b;
-  --color-primary-800: #171717;
-  --color-primary-900: #0a0a0a;
+  /* BRAND PRIMARY (Warm Red - Branding) */
+  --color-primary-50:  #fff5f5;
+  --color-primary-100: #ffe3e3;
+  --color-primary-200: #ffbaba;
+  --color-primary-300: #ff8f8f;
+  --color-primary-400: #ff6060;
+  --color-primary-500: #db4444; /* Main Brand Color */
+  --color-primary-600: #c63c3c;
+  --color-primary-700: #a33030;
+  --color-primary-800: #7a2424;
+  --color-primary-900: #471515;
 
-  /* SECONDARY (from #F5F5F5 grayish) */
-  --color-secondary-50: #ffffff;
-  --color-secondary-100: #fafafa;
-  --color-secondary-200: #f5f5f5;
-  --color-secondary-300: #e6e6e6;
-  --color-secondary-400: #d4d4d4;
-  --color-secondary-500: #bebebe;
-  --color-secondary-600: #a8a8a8;
-  --color-secondary-700: #8c8c8c;
-  --color-secondary-800: #616161;
-  --color-secondary-900: #3d3d3d;
+  /* SECONDARY (Dark Neutral / Text Primary) */
+  --color-secondary-50:  #f6f6f6;
+  --color-secondary-100: #e7e7e7;
+  --color-secondary-200: #c8c8c8;
+  --color-secondary-300: #a3a3a3;
+  --color-secondary-400: #7f7f7f;
+  --color-secondary-500: #555555; /* Main text */
+  --color-secondary-600: #3f3f3f;
+  --color-secondary-700: #2b2b2b;
+  --color-secondary-800: #171717;
+  --color-secondary-900: #0a0a0a;
 
-  /* INFO */
-  --color-info-50: #ebf5ff;
-  --color-info-100: #cce8ff;
-  --color-info-200: #99d0ff;
-  --color-info-300: #66b8ff;
-  --color-info-400: #339fff;
-  --color-info-500: #0187ff;
-  --color-info-600: #006bcc;
-  --color-info-700: #004f99;
-  --color-info-800: #003566;
-  --color-info-900: #001a33;
+  /* NEUTRALS (UI Backgrounds, borders, inputs) */
+  --color-neutral-50:  #ffffff;
+  --color-neutral-100: #fafafa;
+  --color-neutral-200: #f5f5f5;
+  --color-neutral-300: #e5e5e5;
+  --color-neutral-400: #cccccc;
+  --color-neutral-500: #b3b3b3;
+  --color-neutral-600: #8c8c8c;
+  --color-neutral-700: #737373;
+  --color-neutral-800: #525252;
+  --color-neutral-900: #292929;
+
+  /* DANGER (Cooler Red — avoids conflict with primary) */
+  --color-danger-50:  #fff1f2;
+  --color-danger-100: #ffe2e5;
+  --color-danger-200: #ffb5bb;
+  --color-danger-300: #ff8892;
+  --color-danger-400: #ff5c66;
+  --color-danger-500: #d92c38; /* Main danger */
+  --color-danger-600: #b3212c;
+  --color-danger-700: #8d1921;
+  --color-danger-800: #661117;
+  --color-danger-900: #3e0a0d;
 
   /* SUCCESS */
-  --color-success-50: #e0fff3;
-  --color-success-100: #b2ffe2;
-  --color-success-200: #7affcd;
-  --color-success-300: #2ef7ac;
-  --color-success-400: #00d48a;
-  --color-success-500: #00a96c;
-  --color-success-600: #008653;
-  --color-success-700: #00633d;
-  --color-success-800: #003f26;
-  --color-success-900: #001c10;
+  --color-success-50:  #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-200: #a7f3d0;
+  --color-success-300: #6ee7b7;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981; /* Main success */
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+  --color-success-800: #065f46;
+  --color-success-900: #064e3b;
 
   /* WARNING */
-  --color-warning-50: #fff9e6;
-  --color-warning-100: #feefc0;
-  --color-warning-200: #fed889;
-  --color-warning-300: #fdc14f;
-  --color-warning-400: #fcaa1a;
-  --color-warning-500: #e38d00;
-  --color-warning-600: #b66d00;
-  --color-warning-700: #8a5000;
-  --color-warning-800: #5f3500;
-  --color-warning-900: #331b00;
+  --color-warning-50:  #fffbea;
+  --color-warning-100: #fff3c4;
+  --color-warning-200: #ffe59e;
+  --color-warning-300: #fdd474;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b; /* Main warning */
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #783309;
 
-  /* ERROR */
-  --color-danger-50: #ffe6e9;
-  --color-danger-100: #ffc7cf;
-  --color-danger-200: #ff8f9c;
-  --color-danger-300: #ff5870;
-  --color-danger-400: #ff2143;
-  --color-danger-500: #e1002a;
-  --color-danger-600: #b00020;
-  --color-danger-700: #800018;
-  --color-danger-800: #50000f;
-  --color-danger-900: #260008;
+  /* INFO */
+  --color-info-50:  #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-200: #bfdbfe;
+  --color-info-300: #93c5fd;
+  --color-info-400: #60a5fa;
+  --color-info-500: #3b82f6; /* Main info */
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-info-800: #1e40af;
+  --color-info-900: #1e3a8a;
 
   --h1-font-size: 3.375rem; /* 54px */
   --h1-line-height: 1;
@@ -92,88 +102,109 @@
 
   --h6-font-size: 1.25rem; /* 20px */
   --h6-line-height: 1.4;
+
+  /* SYSTEM COLORS */
+  --background: var(--color-neutral-50);
+  --surface: var(--color-neutral-100);
+  --surface-dark: var(--color-neutral-800);
+  --border: var(--color-neutral-300);
+  --text-primary: var(--color-secondary-900);
+  --text-secondary: var(--color-secondary-500);
 }
 
 .dark {
-  --background: #0a0a0a;
   --foreground: #ededed;
 
   /* PRIMARY (reverse scale slightly brighter) */
-  --color-primary-50: #1a1a1a;
-  --color-primary-100: #202020;
-  --color-primary-200: #262626;
-  --color-primary-300: #2e2e2e;
-  --color-primary-400: #3a3a3a;
-  --color-primary-500: #474747;
-  --color-primary-600: #5c5c5c;
-  --color-primary-700: #7a7a7a;
-  --color-primary-800: #c3c3c3;
-  --color-primary-900: #ffffff;
+   --color-primary-50:  #2a0b0b;
+  --color-primary-100: #3c1010;
+  --color-primary-200: #521717;
+  --color-primary-300: #6b1e1e;
+  --color-primary-400: #8b2626;
+  --color-primary-500: #db4444; /* stays constant (brand) */
+  --color-primary-600: #ef5b5b;
+  --color-primary-700: #ff8f8f;
+  --color-primary-800: #ffbaba;
+  --color-primary-900: #ffe3e3;
 
-  /* SECONDARY (gray reversed brighter) */
-  --color-secondary-50: #1a1a1a;
-  --color-secondary-100: #2b2b2b;
-  --color-secondary-200: #3c3c3c;
-  --color-secondary-300: #4d4d4d;
-  --color-secondary-400: #636363;
-  --color-secondary-500: #818181;
-  --color-secondary-600: #a0a0a0;
-  --color-secondary-700: #c9c9c9;
-  --color-secondary-800: #e8e8e8;
-  --color-secondary-900: #ffffff;
+  /* SECONDARY (Dark Neutral / Text Primary) */
+  --color-secondary-50:  #0f0f0f;
+  --color-secondary-100: #151515;
+  --color-secondary-200: #1e1e1e;
+  --color-secondary-300: #262626;
+  --color-secondary-400: #333333;
+  --color-secondary-500: #cccccc; /* Main text (higher contrast) */
+  --color-secondary-600: #d9d9d9;
+  --color-secondary-700: #e5e5e5;
+  --color-secondary-800: #f0f0f0;
+  --color-secondary-900: #fafafa;
 
-  /* INFO dark */
-  --color-info-50: #001a33;
-  --color-info-100: #003566;
-  --color-info-200: #004f99;
-  --color-info-300: #006bcc;
-  --color-info-400: #0187ff;
-  --color-info-500: #339fff;
-  --color-info-600: #66b8ff;
-  --color-info-700: #99d0ff;
-  --color-info-800: #cce8ff;
-  --color-info-900: #ebf5ff;
+  /* NEUTRALS (UI Backgrounds, borders, inputs) */
+  --color-neutral-50:  #0c0c0c;
+  --color-neutral-100: #121212;
+  --color-neutral-200: #1a1a1a;
+  --color-neutral-300: #222222;
+  --color-neutral-400: #2e2e2e;
+  --color-neutral-500: #3a3a3a;
+  --color-neutral-600: #666666;
+  --color-neutral-700: #a6a6a6;
+  --color-neutral-800: #d0d0d0;
+  --color-neutral-900: #ffffff;
 
-  /* SUCCESS dark */
-  --color-success-50: #001c10;
-  --color-success-100: #003f26;
-  --color-success-200: #00633d;
-  --color-success-300: #008653;
-  --color-success-400: #00a96c;
-  --color-success-500: #00d48a;
-  --color-success-600: #2ef7ac;
-  --color-success-700: #7affcd;
-  --color-success-800: #b2ffe2;
-  --color-success-900: #e0fff3;
+  /* DANGER */
+  --color-danger-50:  #2b0e10;
+  --color-danger-100: #3b1316;
+  --color-danger-200: #4f1a1d;
+  --color-danger-300: #672228;
+  --color-danger-400: #862b33;
+  --color-danger-500: #d92c38; /* Main danger */
+  --color-danger-600: #ff5c66;
+  --color-danger-700: #ff8892;
+  --color-danger-800: #ffb5bb;
+  --color-danger-900: #ffe2e5;
 
-  /* WARNING dark */
-  --color-warning-50: #331b00;
-  --color-warning-100: #5f3500;
-  --color-warning-200: #8a5000;
-  --color-warning-300: #b66d00;
-  --color-warning-400: #e38d00;
-  --color-warning-500: #fcaa1a;
-  --color-warning-600: #fdc14f;
-  --color-warning-700: #fed889;
-  --color-warning-800: #feefc0;
-  --color-warning-900: #fff9e6;
+  /* SUCCESS */
+  --color-success-50:  #052e22;
+  --color-success-100: #084232;
+  --color-success-200: #0b5742;
+  --color-success-300: #0e6c52;
+  --color-success-400: #109161;
+  --color-success-500: #10b981; /* Main success */
+  --color-success-600: #34d399;
+  --color-success-700: #6ee7b7;
+  --color-success-800: #a7f3d0;
+  --color-success-900: #d1fae5;
 
-  /* ERROR dark */
-  --color-danger-50: #260008;
-  --color-danger-100: #50000f;
-  --color-danger-200: #800018;
-  --color-danger-300: #b00020;
-  --color-danger-400: #e1002a;
-  --color-danger-500: #ff2143;
-  --color-danger-600: #ff5870;
-  --color-danger-700: #ff8f9c;
-  --color-danger-800: #ffc7cf;
-  --color-danger-900: #ffe6e9;
+  /* WARNING */
+  --color-warning-50:  #382507;
+  --color-warning-100: #4c320a;
+  --color-warning-200: #62400c;
+  --color-warning-300: #7b500f;
+  --color-warning-400: #996312;
+  --color-warning-500: #f59e0b; /* Main warning */
+  --color-warning-600: #fbbf24;
+  --color-warning-700: #fdd474;
+  --color-warning-800: #ffe59e;
+  --color-warning-900: #fff3c4;
+
+  /* INFO */
+  --color-info-50:  #0c2339;
+  --color-info-100: #112d49;
+  --color-info-200: #17385b;
+  --color-info-300: #1d4570;
+  --color-info-400: #235589;
+  --color-info-500: #3b82f6; /* Main info */
+  --color-info-600: #60a5fa;
+  --color-info-700: #93c5fd;
+  --color-info-800: #bfdbfe;
+  --color-info-900: #dbeafe;
+
+  --border: var(--color-neutral-400);
 }
 
 body {
   background-color: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -205,6 +236,10 @@ body {
   h6 {
     @apply text-(--h6-font-size) leading-(--h6-line-height) font-medium mb-1;
   }
+
+  input {
+    color: var(--text-secondary);
+  }
 }
 
 @layer utilities {
@@ -212,6 +247,9 @@ body {
     font-family: var(--font-poppins, sans-serif);
   }
   .font-roboto { 
-  font-family: var(--font-roboto);
-}
+    font-family: var(--font-roboto, sans-serif);
+  }
+  .border {
+    border-color: var(--border);
+  }
 }

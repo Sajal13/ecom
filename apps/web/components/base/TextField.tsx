@@ -1,14 +1,13 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { InputHTMLAttributes } from 'react';
+import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
 type Variant = 'filled' | 'outlined';
 type Size = 'small' | 'medium' | 'large';
 
-interface TextFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   variant?: Variant;
   size?: Size;
@@ -28,59 +27,46 @@ const TextField = ({
   labelClassName,
   ...rest
 }: TextFieldProps) => {
-  const labelBaseClass = 'mb-1 text-sm font-medium text-primary-700';
-  const baseClass =
-    'block w-full rounded-md focus:outline-none transition-all duration-300 border bg-transparent focus:border-success';
-
-  const sizeClasses: Record<Size, string> = {
-    small: 'px-3 py-1.5 text-sm',
-    medium: 'px-8 py-3 text-base',
-    large: 'px-12 py-5 text-lg'
-  };
-
-  const colorClasses = classNames({
-    'border-danger-300 ': error,
-    'border-secondary-300': !error
-  });
-
-  const variantClasses: Record<Variant, string> = {
-    filled: classNames({
-      'bg-danger-300 hover:bg-danger-300/80': error,
-      'bg-secondary-300 hover:bg-secondary-300/80': !error
-    }),
-    outlined: 'bg-transparent'
-  };
-
-  const labelClass = twMerge(labelBaseClass, labelClassName);
+  const labelClass = twMerge(
+    classNames('mb-1 text-sm font-medium', labelClassName),
+  );
 
   const inputClass = twMerge(
-    baseClass,
-    sizeClasses[size],
-    colorClasses,
-    variantClasses[variant],
-    className
+    classNames(
+      'block w-full rounded-md focus:outline-none transition-all duration-300 border',
+      'focus:border-success-300',
+      {
+        'border-danger-300': error,
+      },
+      {
+        small: 'px-3 py-1.5 text-sm',
+        medium: 'px-4 py-2 text-base',
+        large: 'px-6 py-4 text-lg',
+      }[size],
+      {
+        filled: classNames(
+          error
+            ? 'bg-danger-300 hover:bg-danger-300/80'
+            : 'bg-secondary-300 hover:bg-secondary-300/80',
+        ),
+        outlined: 'bg-transparent',
+      }[variant],
+      className,
+    ),
   );
+
+  const helperClass = classNames('text-xs mt-1', {
+    'text-danger-500': error,
+    'text-secondary-500': !error,
+  });
 
   return (
     <div className="flex flex-col w-full">
-      {label && (
-        <label className={labelClass}>
-          {label}
-        </label>
-      )}
+      {label && <label className={labelClass}>{label}</label>}
 
       <input className={inputClass} {...rest} />
 
-      {helperText && (
-        <span
-          className={classNames('text-xs mt-1', {
-            'text-danger': error,
-            'text-secondary': !error
-          })}
-        >
-          {helperText}
-        </span>
-      )}
+      {helperText && <span className={helperClass}>{helperText}</span>}
     </div>
   );
 };

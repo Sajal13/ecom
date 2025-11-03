@@ -1,21 +1,9 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { Poppins, Roboto } from 'next/font/google';
+import { poppins, roboto } from 'fonts';
 import './globals.css';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: 'swap',
-  variable: '--font-poppins',
-});
 
-const roboto = Roboto({
-  display: 'swap',
-  subsets: ['latin'],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: '--font-roboto',
-});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
