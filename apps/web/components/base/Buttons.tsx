@@ -4,7 +4,7 @@ import React, { ButtonHTMLAttributes, PropsWithChildren, ReactElement } from 're
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
-type Color = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'neutral';
+type Color = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'neutral' | 'info';
 type Variant = 'filled' | 'outlined' | 'text';
 type Size = 'small' | 'medium' | 'large';
 type Type = 'button' | 'submit' | 'reset';
@@ -87,6 +87,12 @@ const Button = ({
         'bg-danger-300 text-white border border-danger-300 hover:bg-danger-500 hover:border-danger-500',
       outlined: 'border border-danger-300 text-danger-300 hover:bg-danger-300 hover:text-white',
       text: 'border-0 bg-transparent text-danger-500 hover:bg-danger-50',
+    },
+    info: {
+      filled:
+        'bg-info-300 text-white border border-info-300 hover:bg-info-500 hover:border-info-500',
+      outlined: 'border border-info-300 text-info-300 hover:bg-info-300 hover:text-white',
+      text: 'border-0 bg-transparent text-info-500 hover:bg-info-50',
     },
     neutral: {
       filled:

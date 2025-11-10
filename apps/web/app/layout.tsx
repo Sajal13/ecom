@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { poppins, roboto } from 'fonts';
 import './globals.css';
+import MainNav from 'components/common/navbars/MainNav';
 
 
 
@@ -19,7 +20,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${roboto.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
+          <MainNav />
+          <main>
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

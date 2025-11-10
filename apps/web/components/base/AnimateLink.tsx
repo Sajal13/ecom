@@ -14,7 +14,7 @@ export default function AnimatedLink({
   children,
   className,
   position = 'left',
-  color = 'bg-primary-50'
+  color = 'bg-primary-500'
 }: AnimatedLinkProps) {
   const underlineBaseClass = 'absolute -bottom-1 h-[1px] w-0 transition-all duration-300 ease-out rounded-xl'
   const underlinePosition = {
@@ -24,7 +24,7 @@ export default function AnimatedLink({
     right: 'right-0 group-hover:w-full'
   }[position];
 
-  const baseClass = 'group relative inline-block font-bold text-primary-700 hover:text-primary-darker transition-colors duration-300';
+  const baseClass = 'group relative inline-block font-bold text-primary-700 hover:text-primary-900 transition-colors duration-300';
   
   const linkClass = twMerge(baseClass, className);
   const underlineClass = twMerge(underlineBaseClass, underlinePosition, color); 

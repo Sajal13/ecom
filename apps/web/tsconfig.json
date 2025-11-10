@@ -31,6 +31,12 @@
       ],
       "components/*": [
         "./components/*"
+      ],
+      "types/*": [
+        "./types/*"
+      ],
+      "data/*": [
+        "./data/*"
       ]
     }
   },

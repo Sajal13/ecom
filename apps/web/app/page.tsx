@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes';
 import Button from 'components/base/Buttons';
 import FloatingInput from 'components/base/FloatingInput';
 import TextField from 'components/base/TextField';
+import LoadingAnimation from 'components/common/LoadingAnimation';
 
 const Home = () => {
   const { theme, setTheme } = useTheme();
@@ -12,7 +13,7 @@ const Home = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
   return (
-    <div>
+    <div className='min-h-[200vh]'>
       <p className="text-red-500">Hello there</p>
       <h1 className="font-roboto">Hello there</h1>
       <Button variant="text" onClick={handleThemeChange}>
@@ -26,6 +27,9 @@ const Home = () => {
         helperText="We'll never share your email."
       />
       <TextField />
+      <div className='h-64 w-64'>
+        <LoadingAnimation />
+      </div>
     </div>
   );
 };
