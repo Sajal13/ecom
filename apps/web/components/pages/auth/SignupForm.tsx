@@ -20,6 +20,7 @@ const SignupForm = () => {
       name: '',
       emailOrPhone: '',
       password: '',
+      confirmPassword: ''
     },
   });
 
@@ -64,6 +65,20 @@ const SignupForm = () => {
             className="mt-10"
             error={!!errors.password}
             helperText={errors.password?.message}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name="confirmPassword"
+        control={control}
+        render={({ field }) => (
+          <FloatingInput
+            label="Confirm Password"
+            type="password"
+            className="mt-10"
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword?.message}
             {...field}
           />
         )}
