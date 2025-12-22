@@ -4,7 +4,6 @@ import { useTheme } from 'next-themes';
 import Button from 'components/base/Buttons';
 import FloatingInput from 'components/base/FloatingInput';
 import TextField from 'components/base/TextField';
-import LoadingAnimation from 'components/common/LoadingAnimation';
 
 const Home = () => {
   const { theme, setTheme } = useTheme();
@@ -27,9 +26,6 @@ const Home = () => {
         helperText="We'll never share your email."
       />
       <TextField />
-      <div className='h-64 w-64'>
-        <LoadingAnimation />
-      </div>
     </div>
   );
 };

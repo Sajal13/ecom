@@ -1,4 +1,3 @@
-import React from 'react';
 import { mainNavItems } from 'data/common';
 import AnimatedLink from 'components/base/AnimateLink';
 
@@ -11,6 +10,7 @@ const NavItems = () => {
             href={navItem.url}
             className="text-lg  text-secondary-500 font-medium"
             color="bg-secondary-500"
+            position="center"
           >
             {navItem.label}
           </AnimatedLink>

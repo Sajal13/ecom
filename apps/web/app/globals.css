@@ -247,9 +247,6 @@ body {
   .font-roboto {
     font-family: var(--font-roboto, sans-serif);
   }
-  .border {
-    border-color: var(--border);
-  }
 }
 
 

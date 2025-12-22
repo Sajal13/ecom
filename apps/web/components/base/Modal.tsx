@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import React, { Dispatch, PropsWithChildren, SetStateAction } from "react";
+import  { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import { GrClose } from "react-icons/gr";
 import Button from "./Buttons";
 

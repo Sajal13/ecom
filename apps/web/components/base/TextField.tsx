@@ -33,7 +33,7 @@ const TextField = ({
 
   const inputClass = twMerge(
     classNames(
-      'block w-full rounded-md focus:outline-none transition-all duration-300 border',
+      'block w-full rounded-md focus:outline-none transition-all duration-300 border border-[var(--border)]',
       'focus:border-success-300',
       {
         'border-danger-300': error,

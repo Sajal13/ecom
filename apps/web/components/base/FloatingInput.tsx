@@ -31,7 +31,7 @@ const FloatingInput = ({
       'peer block w-full border-b-1 bg-transparent focus:outline-none transition-all duration-300',
       {
         'border-danger-500 focus:border-danger-500': error,
-        'border-neutral-300 focus:border-success-300': !error,
+        'border-neutral-600 focus:border-success-600': !error,
       },
       {
         small: 'pe-3 pt-1.5 pb-1 text-sm',

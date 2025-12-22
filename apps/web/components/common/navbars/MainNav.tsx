@@ -1,22 +1,20 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BiSearch } from 'react-icons/bi';
-import { FaRegHeart, FaUser } from 'react-icons/fa';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import Logo_Dark from 'assets/images/logo/logo_dark.png';
-import Logo_Light from 'assets/images/logo/logo_light.png';
+import Logo_Dark from 'assets/images/logo/logo_dark.webp';
+import Logo_Light from 'assets/images/logo/logo_light.webp';
 import classNames from 'classnames';
 import Button from 'components/base/Buttons';
 import LoadingAnimation from '../LoadingAnimation';
-import MobileNav from './ButtonGroup';
 import ButtonGroup from './ButtonGroup';
 import NavItems from './NavItems';
 import { FaCartShopping } from 'react-icons/fa6';
+import ThemeTogglerButton from './ThemeTogglerButton';
 
 const MainNav = () => {
   const [alpha, setAlpha] = useState(0);
@@ -76,7 +74,10 @@ const MainNav = () => {
               src={theme === 'dark' ? Logo_Dark : Logo_Light}
               alt="logo"
               width={100}
-              height={100}
+              height={66}
+              className='w-[100px] h-auto'
+              loading="eager"
+              priority
             />
           </Link>
           <div className="max-lg:hidden">
@@ -87,6 +88,7 @@ const MainNav = () => {
             <Button size="small" color="secondary" className="lg:hidden">
               <FaCartShopping className="text-xl" />
             </Button>
+            <ThemeTogglerButton />
             <Button size="small" color="secondary" onClick={() => setMobileNavOpen(true)}>
               <RxHamburgerMenu className="text-xl" />
             </Button>
@@ -116,7 +118,7 @@ const MainNav = () => {
         className={classNames(
           'fixed inset-0 h-screen bg-neutral-800/20 z-40 backdrop-blur-[1px] transition-all duration-200 ease-in',
           {
-            'w-full': isMobileNavOpen,
+            'w-full lg:w-0': isMobileNavOpen,
             'w-0': !isMobileNavOpen,
           },
         )}
