@@ -1,14 +1,20 @@
 'use client';
 
-import React, { ButtonHTMLAttributes, PropsWithChildren, ReactElement } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  PropsWithChildren,
+  ReactElement,
+  Ref,
+  RefObject,
+} from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
-type Color = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'neutral' | 'info';
-type Variant = 'filled' | 'outlined' | 'text';
-type Size = 'small' | 'medium' | 'large';
-type Type = 'button' | 'submit' | 'reset';
-type Shape = 'square' | 'circle';
+export type Color = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'neutral' | 'info';
+export type Variant = 'filled' | 'outlined' | 'text';
+export type Size = 'small' | 'medium' | 'large';
+export type Type = 'button' | 'submit' | 'reset';
+export type Shape = 'square' | 'circle';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   startIcon?: React.ReactNode;
@@ -19,6 +25,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: Type;
   className?: string;
   shape?: Shape;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 const Button = ({
@@ -31,9 +38,9 @@ const Button = ({
   shape,
   className,
   children,
+  ref,
   ...rest
 }: PropsWithChildren<ButtonProps>) => {
-
   const baseClass = `flex items-center justify-center font-medium 
     focus:outline-none transition-all border duration-200 cursor-pointer`;
 
@@ -55,7 +62,7 @@ const Button = ({
       large: 'w-12 h-12 text-lg rounded-full',
     },
   };
-  
+
   const variantClasses: Record<Color | 'neutral', Record<Variant, string>> = {
     primary: {
       filled:
@@ -105,7 +112,7 @@ const Button = ({
   const baseSizeClass = shape ? shapeClasses[shape][size] : sizeClasses[size];
   const buttonClass = twMerge(baseClass, baseSizeClass, variantClasses[color][variant], className);
   return (
-    <button type={type} className={buttonClass} {...rest}>
+    <button type={type} className={buttonClass} ref={ref} {...rest}>
       {React.isValidElement(startIcon)
         ? React.cloneElement(startIcon as ReactElement<any>, {
             className: classNames((startIcon as ReactElement<any>).props?.className, 'me-2'),

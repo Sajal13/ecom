@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { FaCartShopping } from 'react-icons/fa6';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useTheme } from 'next-themes';
@@ -9,11 +10,12 @@ import Link from 'next/link';
 import Logo_Dark from 'assets/images/logo/logo_dark.webp';
 import Logo_Light from 'assets/images/logo/logo_light.webp';
 import classNames from 'classnames';
+import { categories } from 'data/navbar';
 import Button from 'components/base/Buttons';
 import LoadingAnimation from '../LoadingAnimation';
 import ButtonGroup from './ButtonGroup';
 import NavItems from './NavItems';
-import { FaCartShopping } from 'react-icons/fa6';
+import ResizableNavbar from './ResizableNavbar';
 import ThemeTogglerButton from './ThemeTogglerButton';
 
 const MainNav = () => {
@@ -75,7 +77,7 @@ const MainNav = () => {
               alt="logo"
               width={100}
               height={66}
-              className='w-[100px] h-auto'
+              className="w-25 h-auto"
               loading="eager"
               priority
             />
@@ -94,6 +96,7 @@ const MainNav = () => {
             </Button>
           </div>
         </nav>
+        <ResizableNavbar navItems={categories} />
       </header>
       <div
         className={classNames(

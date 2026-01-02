@@ -1,4 +1,4 @@
-function hexToRgb(hex: string) {
+export const  hexToRgb = (hex: string) => {
   hex = hex.startsWith('#') ? hex.slice(1) : hex;
 
   if (hex.length === 3) {
@@ -17,3 +17,52 @@ function hexToRgb(hex: string) {
 
   return { r, g, b };
 }
+
+
+export const currencyFormat = (
+  amount: number,
+  options: Intl.NumberFormatOptions = {}
+) => {
+  return new Intl.NumberFormat("en-BD", {
+    style: "currency",
+    currency: "BDT",
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    ...options
+  })
+    .format(amount)
+    .replace("BDT", "৳");
+};
+
+export const numberFormat = (
+  num: number,
+  options?: Intl.NumberFormatOptions
+) => {
+  return new Intl.NumberFormat("en-BD", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    ...options
+  }).format(num);
+};
+
+export const getFileExtension = (fileName: string, separator = ".") =>
+  fileName.split(separator).pop() || "unknown";
+
+
+export const isImageFile = (file: File) => {
+  const imageMimeTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/bmp",
+    "image/webp"
+  ];
+  return imageMimeTypes.includes(file.type);
+};
+
+export const convertFileToAttachment = (file: File) => ({
+  name: file.name,
+  size: `${(file.size / 1024).toFixed(2)} KB`,
+  format: getFileExtension(file.name),
+  preview: isImageFile(file) ? URL.createObjectURL(file) : undefined
+});
