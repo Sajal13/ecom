@@ -1,18 +1,28 @@
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache';
+import { GetProduct } from 'types/api';
 
-export const getProducts = async () => {
+export const getProducts = async ({ limit, select, skip, q }: Partial<GetProduct> = {}) => {
   'use cache';
-  cacheLife('hours');
+  cacheLife('seconds');
 
+  const params = new URLSearchParams();
 
-  const res = await fetch('https://dummyjson.com/products', {
+  if (limit) params.set('limit', limit.toString());
+  if (skip) params.set('skip', skip.toString());
+  if (select) params.set('select', select.join(','));
+  if (q) params.set('q', q);
+
+  const url = `https://dummyjson.com/products${params.toString() ? `?${params.toString()}` : ''}`;
+
+  const res = await fetch(url, {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    cache: 'force-cache'
   });
 
-  const data = await res.json();
+  if (!res.ok) {
+    throw new Error('Failed to fetch products!');
+  };
 
-  return data;
-}
+  return res.json();
+};

@@ -6,7 +6,7 @@ import { Product } from 'types/products';
 import AnimatedLink from 'components/base/AnimateLink';
 import Button from 'components/base/Buttons';
 import Rating from 'components/base/Rating';
-import { currencyFormat } from '../../helpers/utils';
+import { currencyFormat } from 'helpers/utils';
 
 interface ProductCardProps {
   productItem: Product;
@@ -89,7 +89,7 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
               step={0.5}
               className="text-warning-400 pointer-events-none"
             />
-            <span className='text-secondary-800 text-sm'>({productItem.totalReviews})</span>
+            {/* <span className='text-secondary-800 text-sm'>({productItem.totalReviews})</span> */}
           </div>
         )}
       </div>

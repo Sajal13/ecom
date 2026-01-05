@@ -7,6 +7,15 @@ export interface ProductCategory {
   subCategories: { id: number; name: string; slug: string }[];
 }
 
+export interface Review {
+  comment: string;
+  date: string;
+  rating: number;
+  reviewerEmail: string;
+  reviewerName: string;
+  images?: string[];
+}
+
 
 export interface Product {
   id: number;
@@ -14,7 +23,7 @@ export interface Product {
   previousPrice?: number;
   currentPrice: number;
   rating?: number;
-  totalReviews?: number;
+  reviews?: Review[];
   imageUrl: string;
   category: string;
   subCategory: string;

@@ -1,9 +1,10 @@
+'use client';
+
 import React, { PropsWithChildren, useRef } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
-import { SwiperSlide } from 'swiper/react';
 import classNames from 'classnames';
 import { Duration } from 'dayjs/plugin/duration';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { NavigationOptions } from 'swiper/types';
 import Button from 'components/base/Buttons';
 import Swiper from 'components/base/Swiper';
