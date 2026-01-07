@@ -20,15 +20,33 @@ export interface Review {
 export interface Product {
   id: number;
   title: string;
-  previousPrice?: number;
-  currentPrice: number;
+  price: number;
   rating?: number;
   reviews?: Review[];
-  imageUrl: string;
+  thumbnail: string;
   category: string;
   subCategory: string;
-  discount?: number;
+  discountPercentage?: number;
   isWhiteListed?: boolean;
   colors?: string[];
   isNew?: boolean;
+  description?: string;
+  warrantyInformation?: string;
+  returnPolicy?: string; 
+  images?: string[];
+  sku?: string;
+  brand?: string;
+}
+
+export interface PriceCalculation {
+  originalPrice: number;
+  discountedPrice: number;
+  discountAmount: number;
+  discountPercentage: number;
+}
+
+export interface ReviewSummary {
+  totalReviewCount: number;
+  ratingCounts: number[];
+  averageRating: number;
 }

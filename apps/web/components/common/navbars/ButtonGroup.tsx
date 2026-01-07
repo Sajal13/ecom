@@ -1,49 +1,80 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+'use client';
+
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { FaRegHeart, FaUser } from 'react-icons/fa';
 import { FaCartShopping } from 'react-icons/fa6';
-import { GoSearch } from 'react-icons/go';
 import Link from 'next/link';
 import classNames from 'classnames';
+
 import { dropdownItems } from 'data/common';
 import Button from 'components/base/Buttons';
-import SearchForm from './SearchForm';
 import ThemeTogglerButton from './ThemeTogglerButton';
 
 interface ButtonGroupProps {
   className?: string;
   isMobileNavOpen?: boolean;
-  setMobileNavOpen?: Dispatch<SetStateAction<boolean>>
+  setMobileNavOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 const ButtonGroup = ({ className }: ButtonGroupProps) => {
-  const [userDropdownOpen, setDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  /* -----------------------------
+   Close dropdown on outside click
+  ------------------------------*/
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div
       className={classNames(
         'max-lg:mt-auto flex gap-3 justify-between lg:justify-end items-center',
-        className,
+        className
       )}
     >
       <Button size="small" shape="circle" color="secondary">
         <FaRegHeart className="text-xl" />
       </Button>
-      <Button size="small" shape="circle" color="secondary" className="max-lg:hidden">
+
+      <Button
+        size="small"
+        shape="circle"
+        color="secondary"
+        className="max-lg:hidden"
+      >
         <FaCartShopping className="text-xl" />
       </Button>
+
       <div className="max-lg:hidden">
         <ThemeTogglerButton />
       </div>
-      <div className="relative group z-0">
+
+      {/* USER DROPDOWN */}
+      <div
+        ref={wrapperRef}
+        className="relative group"
+        onMouseEnter={() => window.innerWidth >= 1024 && setIsOpen(true)}
+        onMouseLeave={() => window.innerWidth >= 1024 && setIsOpen(false)}
+      >
         <Button
           size="small"
           shape="circle"
           color="secondary"
-          onClick={() => setDropdownOpen((prev) => !prev)}
-          onMouseLeave={() => setDropdownOpen(false)}
+          onClick={() => window.innerWidth < 1024 && setIsOpen((p) => !p)}
         >
           <FaUser className="text-xl" />
         </Button>
-        <AvatarDropdown userDropdownOpen={userDropdownOpen} />
+
+        <AvatarDropdown isOpen={isOpen} />
       </div>
     </div>
   );
@@ -51,24 +82,28 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
 
 export default ButtonGroup;
 
-const AvatarDropdown = ({ userDropdownOpen }: { userDropdownOpen: boolean }) => {
+const AvatarDropdown = ({ isOpen }: { isOpen: boolean }) => {
+  if (!isOpen) return null;
+
   return (
     <div
-      className={classNames(
-        `absolute px-5 py-4 right-0 max-lg:bottom-10 lg:top-10 bg-linear-to-br from-neutral-500/20 via-neutral-800/10 to-neutral-900/5  
-        backdrop-blur-md -z-10 lg:group-hover:block w-64 before:content-[''] before:h-10 before:w-12  
-        before:bg-transparent before:-z-10 before:absolute before:-top-10 before:right-0`,
-        { block: userDropdownOpen, hidden: !userDropdownOpen },
-      )}
+      className="
+        absolute right-0 top-10 z-50 mt-2 w-64 rounded-xl px-5 py-4 lg:group-hover:block bg-neutral-50
+        backdrop-blur-md shadow-lg max-lg:bottom-12 max-lg:top-auto before:content-[''] before:h-5 before:w-40  
+        before:bg-transparent before:-z-10 before:absolute before:-top-4 before:right-0
+      "
     >
       <ul className="flex flex-col gap-4">
         {dropdownItems.map((item) => (
-          <li key={item.id} className="">
+          <li key={item.id}>
             <Link
               href={item.url}
-              className="text-secondary-600 hover:text-secondary-800 text-sm flex items-center"
+              className="
+                flex items-center text-sm text-secondary-600
+                hover:text-secondary-800 transition
+              "
             >
-              <span className="text-xl md:text-2xl mr-4">{item.icon}</span>
+              <span className="mr-4 text-xl">{item.icon}</span>
               {item.label}
             </Link>
           </li>
