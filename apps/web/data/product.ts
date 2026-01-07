@@ -1,0 +1,69 @@
+// import { Product } from "types/products";
+// import product1 from 'assets/images/products/2.png';
+// import product2 from 'assets/images/products/3.png';
+// import product3 from 'assets/images/products/4.png';
+// import product4 from 'assets/images/products/5.png';
+
+// export const products: Product[] = [
+//   {
+//     id: 1,
+//     title: "Wireless Noise Cancelling Headphones",
+//     previousPrice: 8999,
+//     currentPrice: 7499,
+//     rating: 4.6,
+//     imageUrl: product1.src,
+//     category: "Electronics",
+//     subCategory: "Audio",
+//     discount: 17,
+//     isWhiteListed: true,
+//     colors: ["black", "silver", "blue"],
+//     isNew: true,
+//   },
+//   {
+//     id: 2,
+//     title: "Smart Fitness Watch",
+//     previousPrice: 5999,
+//     currentPrice: 4999,
+//     rating: 4.3,
+//     imageUrl: product2.src,
+//     category: "Electronics",
+//     subCategory: "Wearables",
+//     discount: 16,
+//     colors: ["black", "green"],
+//     isNew: false,
+//   },
+//   {
+//     id: 3,
+//     title: "Running Shoes",
+//     currentPrice: 3299,
+//     rating: 4.1,
+//     imageUrl: product3.src,
+//     category: "Fashion",
+//     subCategory: "Footwear",
+//     isWhiteListed: true,
+//     colors: ["red", "black", "white"],
+//   },
+//   {
+//     id: 4,
+//     title: "Organic Cotton T-Shirt",
+//     previousPrice: 1299,
+//     currentPrice: 999,
+//     imageUrl: product3.src,
+//     category: "Fashion",
+//     subCategory: "Apparel",
+//     discount: 23,
+//     isNew: true,
+//   },
+//   {
+//     id: 5,
+//     title: "Modern Wooden Chair",
+//     previousPrice: 8499,
+//     currentPrice: 6999,
+//     rating: 4.8,
+//     imageUrl: product4.src,
+//     category: "Home",
+//     subCategory: "Furniture",
+//     discount: 18,
+//     colors: ["brown", "walnut"],
+//   },
+// ];

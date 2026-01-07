@@ -15,6 +15,8 @@ interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'si
   helperText?: string;
   className?: string;
   labelClassName?: string;
+  rootClassName?: string;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 const TextField = ({
@@ -25,6 +27,8 @@ const TextField = ({
   helperText,
   className,
   labelClassName,
+  rootClassName = 'w-full',
+  ref,
   ...rest
 }: TextFieldProps) => {
   const labelClass = twMerge(
@@ -33,7 +37,7 @@ const TextField = ({
 
   const inputClass = twMerge(
     classNames(
-      'block w-full rounded-md focus:outline-none transition-all duration-300 border',
+      'block w-full rounded-md focus:outline-none transition-all duration-300 border border-[var(--border)]',
       'focus:border-success-300',
       {
         'border-danger-300': error,
@@ -61,10 +65,10 @@ const TextField = ({
   });
 
   return (
-    <div className="flex flex-col w-full">
+    <div className={classNames('"flex flex-col', rootClassName)}>
       {label && <label className={labelClass}>{label}</label>}
 
-      <input className={inputClass} {...rest} />
+      <input ref={ref} className={inputClass} {...rest} />
 
       {helperText && <span className={helperClass}>{helperText}</span>}
     </div>
