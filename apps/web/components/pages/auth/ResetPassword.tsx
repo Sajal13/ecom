@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
@@ -12,7 +13,8 @@ import OtpInput from './OtpInput';
 const OTP_EXPIRY_TIME = 60;
 
 const ResetPassword = () => {
-  const { seconds, isExpired, resetTimer, stopTimer } = useOtpTimer(OTP_EXPIRY_TIME);
+  const { seconds, isExpired, resetTimer, stopTimer } =
+    useOtpTimer(OTP_EXPIRY_TIME);
   const {
     control,
     handleSubmit,
@@ -36,6 +38,10 @@ const ResetPassword = () => {
     // await onResend(); // call API to resend OTP
     resetTimer();
   };
+
+  useEffect(() => {
+    reset();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,14 +78,22 @@ const ResetPassword = () => {
         control={control}
         render={({ field }) => (
           <>
-            <OtpInput value={field.value} onChange={field.onChange} error={!!errors.otp} />
-            {errors.otp && <p className="mt-1 text-sm text-red-500">{errors.otp.message}</p>}
+            <OtpInput
+              value={field.value}
+              onChange={field.onChange}
+              error={!!errors.otp}
+            />
+            {errors.otp && (
+              <p className="mt-1 text-sm text-red-500">{errors.otp.message}</p>
+            )}
           </>
         )}
       />
       <div className="flex items-center justify-between mt-4">
         <span className="text-sm text-secondary-500">
-          {isExpired ? 'Didn’t receive the code?' : `Resend in ${formatTime(seconds)}`}
+          {isExpired
+            ? 'Didn’t receive the code?'
+            : `Resend in ${formatTime(seconds)}`}
         </span>
 
         <Button
@@ -93,7 +107,12 @@ const ResetPassword = () => {
           Resend OTP
         </Button>
       </div>
-      <Button type="submit" variant="filled" color="primary" className="w-full mt-10">
+      <Button
+        type="submit"
+        variant="filled"
+        color="primary"
+        className="w-full mt-10"
+      >
         Submit
       </Button>
     </form>

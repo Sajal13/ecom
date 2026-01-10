@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupSchema, SignupSchemaType } from 'lib/schemas/auth';
@@ -20,7 +20,7 @@ const SignupForm = () => {
       name: '',
       emailOrPhone: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     },
   });
 
@@ -28,6 +28,11 @@ const SignupForm = () => {
     console.log(data);
     reset();
   };
+
+  useEffect(() => {
+    reset();
+  }, []);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -83,10 +88,15 @@ const SignupForm = () => {
           />
         )}
       />
-      <Button type="submit" variant="filled" color="primary" className="w-full mt-10">
+      <Button
+        type="submit"
+        variant="filled"
+        color="primary"
+        className="w-full mt-10"
+      >
         Create Account
       </Button>
-      <p className='text-center mt-8'>
+      <p className="text-center mt-8">
         Already have an account?{' '}
         <AnimatedLink
           href="/login"

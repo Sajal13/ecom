@@ -5,7 +5,6 @@ import { FaRegHeart, FaUser } from 'react-icons/fa';
 import { FaCartShopping } from 'react-icons/fa6';
 import Link from 'next/link';
 import classNames from 'classnames';
-
 import { dropdownItems } from 'data/common';
 import Button from 'components/base/Buttons';
 import ThemeTogglerButton from './ThemeTogglerButton';
@@ -25,7 +24,10 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
   ------------------------------*/
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -38,21 +40,25 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
     <div
       className={classNames(
         'max-lg:mt-auto flex gap-3 justify-between lg:justify-end items-center',
-        className
+        className,
       )}
     >
-      <Button size="small" shape="circle" color="secondary">
-        <FaRegHeart className="text-xl" />
-      </Button>
+      <Link href="whitelist">
+        <Button size="small" shape="circle" color="secondary">
+          <FaRegHeart className="text-xl" />
+        </Button>
+      </Link>
 
-      <Button
-        size="small"
-        shape="circle"
-        color="secondary"
-        className="max-lg:hidden"
-      >
-        <FaCartShopping className="text-xl" />
-      </Button>
+      <Link href="/cart">
+        <Button
+          size="small"
+          shape="circle"
+          color="secondary"
+          className="max-lg:hidden"
+        >
+          <FaCartShopping className="text-xl" />
+        </Button>
+      </Link>
 
       <div className="max-lg:hidden">
         <ThemeTogglerButton />

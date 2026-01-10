@@ -1,7 +1,12 @@
 import { cacheLife } from 'next/cache';
 import { GetProduct } from 'types/api';
 
-export const getProducts = async ({ limit, select, skip, q }: Partial<GetProduct> = {}) => {
+export const getProducts = async ({
+  limit,
+  select,
+  skip,
+  q,
+}: Partial<GetProduct> = {}) => {
   'use cache';
   cacheLife('seconds');
 
@@ -22,7 +27,21 @@ export const getProducts = async ({ limit, select, skip, q }: Partial<GetProduct
 
   if (!res.ok) {
     throw new Error('Failed to fetch products!');
-  };
+  }
 
   return res.json();
+};
+
+export const getCategories = async () => {
+  'use cache';
+  cacheLife('seconds');
+
+  const response = await fetch(`https://dummyjson.com/products/categories`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  return response.json();
 };

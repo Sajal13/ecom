@@ -1,17 +1,23 @@
 'use client';
 
-import { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { FaAngleDown } from 'react-icons/fa';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
-import { ProductCategory } from 'types/products';
+import { Category } from 'types/products';
 import AnimatedLink from 'components/base/AnimateLink';
 import Button from 'components/base/Buttons';
 
 // Define the type for the component props
 interface ResizableNavProps {
-  navItems: ProductCategory[];
+  navItems: Category[];
 }
 
 const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
@@ -49,7 +55,8 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
     for (let i = 0; i < navItemsRef.current.length; i++) {
       const navItem = navItemsRef.current[i];
       if (navItem) {
-        const newTotalWidth = totalVisibleWidth + navItem.clientWidth + gapWidth + 35;
+        const newTotalWidth =
+          totalVisibleWidth + navItem.clientWidth + gapWidth + 30;
 
         // The check should be: does `newTotalWidth` + `moreBtnWidth` fit inside the container?
         if (newTotalWidth + moreBtnWidth > containerWidth) {
@@ -113,7 +120,7 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
       <ul className="flex items-center gap-5">
         {navItems.map((item, index) => (
           <li
-            key={item.id}
+            key={item.slug}
             ref={(el: HTMLLIElement) => {
               navItemsRef.current[index] = el;
             }}
@@ -122,14 +129,19 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
             <AnimatedLink
               href={`/category/${item.slug}`}
               color="bg-secondary-900"
-              className={classNames('text-secondary-800 hover:text-secondary-900 font-normal', {
-                'font-medium text-success-600!': pathname.startsWith(`/category/${item.slug}`),
-              })}
+              className={classNames(
+                'text-secondary-800 hover:text-secondary-900 font-normal text-nowrap',
+                {
+                  'font-medium text-success-600!': pathname.startsWith(
+                    `/category/${item.slug}`,
+                  ),
+                },
+              )}
             >
-              {item.name}
+              {item.name.slice(0, 90)}
             </AnimatedLink>
 
-            {item.subCategories && (
+            {/* {item.subCategories && (
               <ul className="absolute hidden group-hover:block left-auto top-8 w-50 bg-neutral-100 rounded-lg border border-neutral-200 shadow py-2">
                 {item.subCategories.map((sub) => (
                   <li
@@ -146,7 +158,7 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
                   </li>
                 ))}
               </ul>
-            )}
+            )} */}
           </li>
         ))}
 
@@ -171,16 +183,16 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
 
           {/* Dropdown Menu */}
           {isMoreDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-neutral-100 border border-neutral-200 rounded-md shadow-lg py-1 z-20">
+            <div className="absolute right-0 mt-2 w-60 bg-neutral-100 border border-neutral-200 rounded-md shadow-lg py-1 z-20 max-h-125 overflow-y-auto overflow-x-hidden">
               {navItems.map((item, index) => (
                 <Link
-                  key={item.id}
+                  key={item.slug}
                   href={`category/${item.slug}`}
                   ref={(el: HTMLAnchorElement) => {
                     dropdownItemsRef.current[index] = el;
                   }}
                   style={{ display: 'none' }}
-                  className={`block px-4 py-2 text-primary hover:bg-neutral-200 ${
+                  className={`block px-4 py-2 sm:py-3 text-primary hover:bg-neutral-300  ${
                     pathname === `/category/${item.slug}`
                       ? 'bg-info-200 text-info-600 font-semibold'
                       : ''

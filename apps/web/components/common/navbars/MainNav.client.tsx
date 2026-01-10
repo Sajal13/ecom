@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FaCartShopping } from 'react-icons/fa6';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Logo_Dark from 'assets/images/logo/logo_dark.webp';
 import Logo_Light from 'assets/images/logo/logo_light.webp';
 import classNames from 'classnames';
-import { categories } from 'data/navbar';
+import { Category } from 'types/products';
 import Button from 'components/base/Buttons';
 import LoadingAnimation from '../LoadingAnimation';
 import ButtonGroup from './ButtonGroup';
@@ -18,7 +18,11 @@ import NavItems from './NavItems';
 import ResizableNavbar from './ResizableNavbar';
 import ThemeTogglerButton from './ThemeTogglerButton';
 
-const MainNav = () => {
+interface MainNavProps {
+  categories: Category[];
+}
+
+const MainNav = ({categories}: MainNavProps) => {
   const [alpha, setAlpha] = useState(0);
   const [shadow, setShadow] = useState('shadow-none');
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
@@ -50,6 +54,7 @@ const MainNav = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
 
   if (!mounted) {
     return (
@@ -91,7 +96,11 @@ const MainNav = () => {
               <FaCartShopping className="text-xl" />
             </Button>
             <ThemeTogglerButton />
-            <Button size="small" color="secondary" onClick={() => setMobileNavOpen(true)}>
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => setMobileNavOpen(true)}
+            >
               <RxHamburgerMenu className="text-xl" />
             </Button>
           </div>
@@ -109,7 +118,11 @@ const MainNav = () => {
       >
         <div className="p-6 md:px-10 h-full flex flex-col">
           <div className="flex justify-end mb-6">
-            <Button size="small" color="secondary" onClick={() => setMobileNavOpen(false)}>
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => setMobileNavOpen(false)}
+            >
               <RiCloseLargeFill className="text-xl" />
             </Button>
           </div>

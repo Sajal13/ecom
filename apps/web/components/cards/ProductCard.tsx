@@ -36,8 +36,8 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
 
   return (
     <div className="group">
-      <div className="min-h-62.5 bg-neutral-200 flex justify-center items-center w-full p-4 relative z-0 rounded-md mb-4">
-        <Link href="#!">
+      <div className="min-h-62.5 bg-neutral-200 w-full flex justify-center items-center p-4 relative z-0 rounded-md mb-4">
+        <Link href="#!" className='w-full flex justify-center items-center'>
           <div className="w-47.5 h-45 relative">
             <Image
               src={productItem.thumbnail ?? image1}

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { forgotPasswordSchema, ForgotPasswordSchemaType } from 'lib/schemas/auth';
 import FloatingInput from 'components/base/FloatingInput';
 import Button from 'components/base/Buttons';
+import { useEffect } from 'react';
 
 const ForgotPasswordForm = () => {
   const {
@@ -23,7 +24,12 @@ const ForgotPasswordForm = () => {
   const onSubmit = (data: ForgotPasswordSchemaType) => {
     console.log(data);
     reset();
-  }
+  };
+
+  useEffect(() => {
+    reset()
+  }, []);
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller

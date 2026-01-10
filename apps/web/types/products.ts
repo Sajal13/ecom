@@ -50,3 +50,10 @@ export interface ReviewSummary {
   ratingCounts: number[];
   averageRating: number;
 }
+
+export interface Category {
+  id: number;
+  slug: string;
+  name: string;
+  url?: string;
+}

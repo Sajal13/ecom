@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
+import LoadingAnimation from 'components/common/LoadingAnimation';
 import Search from 'components/common/Search';
-import MainNav from 'components/common/navbars/MainNav';
+import MainNavServer from 'components/common/navbars/MainNav.server';
 
 export const metadata: Metadata = {
   title: 'Ecom Website',
@@ -14,7 +16,9 @@ export default function Layout({
 }>) {
   return (
     <>
-      <MainNav />
+      <Suspense fallback={<LoadingAnimation />}>
+        <MainNavServer />
+      </Suspense>
       <main>{children}</main>
       <Search />
     </>

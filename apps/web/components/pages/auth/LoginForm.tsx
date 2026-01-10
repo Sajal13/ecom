@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaType } from 'lib/schemas/auth';
@@ -26,6 +26,10 @@ const LoginForm = () => {
     console.log(data);
     reset();
   };
+
+  useEffect(() => {
+    reset();
+  }, []);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -55,17 +59,22 @@ const LoginForm = () => {
           />
         )}
       />
-      <div className='mt-4 text-end'>
+      <div className="mt-4 text-end">
         <AnimatedLink
           href="/forgot-password"
           className="text-sm text-secondary-900 font-medium"
           color="bg-secondary-900"
-          position='right'
+          position="right"
         >
           Forgot Password?
         </AnimatedLink>
       </div>
-      <Button type="submit" variant="filled" color="primary" className="w-full mt-10">
+      <Button
+        type="submit"
+        variant="filled"
+        color="primary"
+        className="w-full mt-10"
+      >
         Log in
       </Button>
       <p className="text-center mt-8">

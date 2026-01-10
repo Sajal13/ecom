@@ -1,6 +1,7 @@
 import { NavItem, UserDropDownItem  } from "types/common";
 import { LuUser, LuShoppingBag } from "react-icons/lu";
 import { FaRegStar } from "react-icons/fa";
+import { MdLogin } from "react-icons/md";
 
 export const mainNavItems: NavItem[] = [
   {
@@ -38,5 +39,11 @@ export const dropdownItems: UserDropDownItem[] = [
     label: 'My Reviews',
     url: '/reviews',
     icon: <FaRegStar />
+  },
+  {
+    id: 4,
+    label: 'Log In',
+    url: '/login',
+    icon: <MdLogin />
   }
 ]

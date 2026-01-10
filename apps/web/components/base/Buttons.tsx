@@ -57,9 +57,9 @@ const Button = ({
       large: 'p-4 text-lg rounded-lg',
     },
     circle: {
-      small: 'w-9 h-9 text-sm rounded-full',
-      medium: 'w-11 h-11 text-base rounded-full',
-      large: 'w-12 h-12 text-lg rounded-full',
+      small: 'min-w-9 min-h-9 text-sm rounded-full',
+      medium: 'min-w-11 min-h-11 text-base rounded-full',
+      large: 'min-w-12 min-h-12 text-lg rounded-full',
     },
   };
 
