@@ -2,27 +2,40 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { GoSearch } from 'react-icons/go';
+import { RiSearchLine } from "react-icons/ri";
 import { MdOutlineClose } from 'react-icons/md';
+import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
+import debounce from 'lodash/debounce';
 import { z } from 'zod';
 import Button from 'components/base/Buttons';
 import TextField from 'components/base/TextField';
+import { useRouter } from 'next/navigation';
 
 interface SearchFormData {
   search: string;
 }
 
+type Product = {
+  id: number;
+  title: string;
+  thumbnail: string;
+};
+
 const searchFormSchema = z.object({
-  search: z.string().min(3, 'Search must contain at least 3 characters.'),
+  search: z.string().min(1),
 });
 
 const SearchFAB = () => {
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedProduct, setSearchedProduct] = useState<Product[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const fabButtonRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   const {
     control,
@@ -36,104 +49,146 @@ const SearchFAB = () => {
     },
   });
 
+  /* ------------------ Debounced Search ------------------ */
+
+  const debouncedSearch = useRef(
+    debounce(async (query: string) => {
+      try {
+        setIsSearching(true);
+
+        const res = await fetch(`/api/search?q=${query}`);
+        const data = await res.json();
+
+        setSearchedProduct(data.products || []);
+      } catch {
+        setSearchedProduct([]);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 400),
+  ).current;
+
   /* ------------------ Handlers ------------------ */
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+
+    if (!value.trim()) {
+      setSearchedProduct([]);
+      debouncedSearch.cancel();
+      return;
+    }
+
+    debouncedSearch(value);
+  };
 
   const toggle = () => setOpen((prev) => !prev);
 
   const close = () => {
     setOpen(false);
+    reset();
+    setSearchQuery('');
+    setSearchedProduct([]);
     fabButtonRef.current?.focus();
   };
 
   const onSubmit = (data: SearchFormData) => {
-    console.log('Search:', data.search);
-    reset();
+    router.push(`/search?q=${data.search}`)
     close();
   };
 
   /* ------------------ Effects ------------------ */
 
-  // Auto focus input on open
+  // Auto focus
   useEffect(() => {
     if (!open) return;
 
-    const timer = setTimeout(() => {
+    const t = setTimeout(() => {
       formRef.current?.querySelector<HTMLInputElement>('input')?.focus();
     }, 150);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(t);
   }, [open]);
 
-  // Close on ESC
+  // ESC close
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
     };
 
-    if (open) {
-      window.addEventListener('keydown', onKeyDown);
-    }
-
-    return () => window.removeEventListener('keydown', onKeyDown);
+    if (open) window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  // Click outside to close
+  // Click outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handler = (e: MouseEvent) => {
       if (
         open &&
-        formRef.current &&
-        !formRef.current.contains(e.target as Node) &&
+        !formRef.current?.contains(e.target as Node) &&
         !fabButtonRef.current?.contains(e.target as Node)
       ) {
         close();
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
   }, [open]);
 
-  // Focus trap inside form
+  // Cleanup debounce
   useEffect(() => {
-    if (!open || !formRef.current) return;
-
-    const focusable =
-      formRef.current.querySelectorAll<HTMLElement>('input, button');
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    const trap = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener('keydown', trap);
-    return () => document.removeEventListener('keydown', trap);
-  }, [open]);
+    return () => debouncedSearch.cancel();
+  }, []);
 
   /* ------------------ Render ------------------ */
 
   return (
-    <div className="fixed bottom-5 right-5 z-40">
+    <div className="fixed bottom-5 right-5 z-30">
       <div className="relative flex items-center">
+        {/* Result Box */}
+        <div
+          className={classNames(
+            `absolute right-17 sm:right-27 bottom-full mb-3 w-64 max-h-80 overflow-y-auto overflow-x-hidden
+             bg-neutral-50 border border-neutral-300 rounded-md shadow-lg overflow-hidden transition-all duration-300 origin-bottom`,
+            {
+              'scale-y-100 opacity-100': searchQuery.length > 0,
+              'scale-y-0 opacity-0 pointer-events-none': !searchQuery.length,
+            },
+          )}
+        >
+          {isSearching && (
+            <div className="p-3 text-sm text-primary">Searching…</div>
+          )}
+
+          {!isSearching && searchedProduct.length === 0 && (
+            <div className="p-3 text-sm text-primary">No results found</div>
+          )}
+
+          {searchedProduct.map((product) => (
+            <Link
+              href={`/search/${product.id}`}
+              key={product.id}
+              onClick={() => close()}
+              className="flex items-center gap-3 p-3 hover:bg-neutral-100 cursor-pointer"
+            >
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className="w-10 h-10 rounded object-cover"
+              />
+              <span className="text-sm">{product.title}</span>
+            </Link>
+          ))}
+        </div>
+
         {/* Search Form */}
         <form
           ref={formRef}
           role="search"
-          aria-hidden={!open}
-          aria-labelledby="floating-search"
           onSubmit={handleSubmit(onSubmit)}
           className={classNames(
-            'absolute right-14 flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out origin-right',
+            'absolute right-14 flex items-center gap-2 transition-all duration-300 origin-right',
             {
               'scale-x-100 opacity-100': open,
               'scale-x-0 opacity-0 pointer-events-none': !open,
@@ -145,12 +200,14 @@ const SearchFAB = () => {
             control={control}
             render={({ field }) => (
               <TextField
-                id="floating-search"
+                {...field}
                 placeholder="Search…"
-                value={field.value}
-                onChange={field.onChange}
                 className="w-54 sm:w-64 bg-neutral-50"
                 error={!!errors.search}
+                onChange={(e) => {
+                  field.onChange(e);
+                  handleSearchChange(e.target.value);
+                }}
               />
             )}
           />
@@ -160,28 +217,26 @@ const SearchFAB = () => {
             variant="outlined"
             color="neutral"
             shape="circle"
-            className="bg-neutral-50"
+            className="bg-neutral-900 hover:bg-neutral-900"
           >
-            <GoSearch className="text-xl" />
+            <RiSearchLine className="text-xl text-neutral-50" />
           </Button>
         </form>
 
-        {/* Floating Action Button */}
+        {/* FAB */}
         <Button
           ref={fabButtonRef}
           variant="outlined"
           color="neutral"
           shape="circle"
-          className="bg-neutral-50 relative z-10"
+          className="bg-neutral-800 hover:bg-neutral-900 relative z-10"
           onClick={toggle}
           aria-expanded={open}
-          aria-controls="floating-search"
-          aria-label={open ? 'Close search' : 'Open search'}
         >
           {open ? (
             <MdOutlineClose className="text-2xl text-danger-500" />
           ) : (
-            <GoSearch className="text-xl" />
+            <RiSearchLine className="text-xl text-neutral-50" />
           )}
         </Button>
       </div>

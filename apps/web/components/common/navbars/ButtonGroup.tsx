@@ -43,7 +43,7 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
         className,
       )}
     >
-      <Link href="whitelist">
+      <Link href="/wishlist">
         <Button size="small" shape="circle" color="secondary">
           <FaRegHeart className="text-xl" />
         </Button>

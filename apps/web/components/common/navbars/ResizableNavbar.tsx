@@ -113,11 +113,11 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
 
   return (
     <div
-      className="relative px-6 flex justify-between items-center w-full max-w-7xl"
+      className="relative px-6 flex justify-between items-center w-full max-w-screen"
       ref={containerRef}
     >
       {/* This ul holds the main navigation links */}
-      <ul className="flex items-center gap-5">
+      <ul className="flex items-center gap-3 sm:gap-5">
         {navItems.map((item, index) => (
           <li
             key={item.slug}

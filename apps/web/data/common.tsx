@@ -37,7 +37,7 @@ export const dropdownItems: UserDropDownItem[] = [
   {
     id: 3,
     label: 'My Reviews',
-    url: '/reviews',
+    url: '/my-reviews',
     icon: <FaRegStar />
   },
   {

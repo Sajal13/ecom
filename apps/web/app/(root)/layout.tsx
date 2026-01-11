@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import LoadingAnimation from 'components/common/LoadingAnimation';
 import Search from 'components/common/Search';
 import MainNavServer from 'components/common/navbars/MainNav.server';
+import Footer from 'components/common/Footer';
 
 export const metadata: Metadata = {
   title: 'Ecom Website',
@@ -19,8 +20,9 @@ export default function Layout({
       <Suspense fallback={<LoadingAnimation />}>
         <MainNavServer />
       </Suspense>
-      <main>{children}</main>
+      <main className='min-h-[60vh]'>{children}</main>
       <Search />
+      <Footer />
     </>
   );
 }

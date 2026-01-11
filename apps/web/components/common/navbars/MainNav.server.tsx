@@ -6,7 +6,7 @@ const MainNavServer = async () => {
 
   return (
     <>
-      <MainNav categories={categories}/>
+        <MainNav categories={categories} />
     </>
   );
 };

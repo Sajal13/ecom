@@ -8,7 +8,7 @@ export const signupSchema = z
     emailOrPhone: z
       .string()
       .refine(
-        (value) => z.string().email().safeParse(value).success || bdPhoneRegex.test(value),
+        (value) => z.email().safeParse(value).success || bdPhoneRegex.test(value),
         'Enter a valid email or Bangladeshi phone number',
       ),
     password: z
@@ -31,7 +31,7 @@ export const loginSchema = z.object({
   emailOrPhone: z
     .string()
     .refine(
-      (value) => z.string().email().safeParse(value).success || bdPhoneRegex.test(value),
+      (value) => z.email().safeParse(value).success || bdPhoneRegex.test(value),
       'Enter a valid email or Bangladeshi phone number',
     ),
   password: z

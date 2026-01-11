@@ -248,12 +248,3 @@ body {
     font-family: var(--font-roboto, sans-serif);
   }
 }
-
-
-@layer components {
-  .four-zero-four {
-    @apply text-[9rem] md:text-[18rem] lg:text-[25rem] skew-x-15 
-    bg-linear-to-r from-danger-400 via-danger-600 to-danger-800
-    inline-block text-transparent bg-clip-text;
-  }
-}

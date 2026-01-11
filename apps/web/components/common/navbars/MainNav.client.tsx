@@ -1,17 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { FaCartShopping } from 'react-icons/fa6';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-import Link from 'next/link';
-import Logo_Dark from 'assets/images/logo/logo_dark.webp';
-import Logo_Light from 'assets/images/logo/logo_light.webp';
 import classNames from 'classnames';
 import { Category } from 'types/products';
 import Button from 'components/base/Buttons';
+import Logo from 'components/common/Logo';
 import LoadingAnimation from '../LoadingAnimation';
 import ButtonGroup from './ButtonGroup';
 import NavItems from './NavItems';
@@ -22,46 +18,50 @@ interface MainNavProps {
   categories: Category[];
 }
 
-const MainNav = ({categories}: MainNavProps) => {
+const MAX_SCROLL = 300;
+
+const MainNav = ({ categories }: MainNavProps) => {
   const [alpha, setAlpha] = useState(0);
-  const [shadow, setShadow] = useState('shadow-none');
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+
+
+  /* ---------------- Scroll Background Effect ---------------- */
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const maxScroll = 300;
+      if (ticking) return;
 
-      // Calculate alpha between 0 and 1
-      let newAlpha = scrollTop / maxScroll;
-      if (newAlpha > 1) newAlpha = 1;
-      if (newAlpha < 0) newAlpha = 0;
-      setAlpha(newAlpha);
-
-      if (scrollTop > 30) {
-        setShadow('shadow-xs');
-      } else {
-        setShadow('shadow-none');
-      }
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        const nextAlpha = Math.min(scrollTop / MAX_SCROLL, 1);
+        setAlpha(nextAlpha);
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  /* ---------------- Handlers ---------------- */
+
+  const openMobileNav = useCallback(() => setMobileNavOpen(true), []);
+  const closeMobileNav = useCallback(() => setMobileNavOpen(false), []);
+
+  const hasShadow = alpha > 0.1;
+
+  /* ---------------- Render ---------------- */
+
+   useEffect(() => {
     setMounted(true);
   }, []);
 
-
   if (!mounted) {
-    return (
-      <div className="bg-neutral-50 h-screen w-screen flex justify-center items-center">
-        <LoadingAnimation />
-      </div>
-    );
+    return;
   }
 
   return (
@@ -69,50 +69,57 @@ const MainNav = ({categories}: MainNavProps) => {
       <header
         className={classNames(
           'sticky top-0 left-0 z-30 backdrop-blur-md transition-all duration-300',
-          shadow,
+          {
+            'shadow-xs': hasShadow,
+            'shadow-none': !hasShadow,
+          },
         )}
         style={{
           backgroundColor: `rgba(var(--background-rgb), ${alpha})`,
         }}
       >
         <nav className="h-20 flex items-center justify-between px-6">
-          <Link href="/">
-            <Image
-              src={theme === 'dark' ? Logo_Dark : Logo_Light}
-              alt="logo"
-              width={100}
-              height={66}
-              className="w-25 h-auto"
-              loading="eager"
-              priority
-            />
-          </Link>
+          {/* Logo */}
+          <Suspense fallback={<LoadingAnimation />}>
+            <Logo />
+          </Suspense>
+
+          {/* Desktop Nav */}
           <div className="max-lg:hidden">
             <NavItems />
           </div>
+
           <ButtonGroup className="max-lg:hidden" />
+
+          {/* Mobile Actions */}
           <div className="flex gap-2 items-center lg:hidden">
-            <Button size="small" color="secondary" className="lg:hidden">
+            <Button size="small" color="secondary">
               <FaCartShopping className="text-xl" />
             </Button>
+
             <ThemeTogglerButton />
+
             <Button
               size="small"
               color="secondary"
-              onClick={() => setMobileNavOpen(true)}
+              onClick={openMobileNav}
+              aria-label="Open menu"
             >
               <RxHamburgerMenu className="text-xl" />
             </Button>
           </div>
         </nav>
+
         <ResizableNavbar navItems={categories} />
       </header>
-      <div
+
+      {/* ---------------- Mobile Drawer ---------------- */}
+      <aside
         className={classNames(
-          'fixed left-0 top-0 h-screen transition-all duration-300 ease-linear bg-neutral-50 z-50',
+          'fixed inset-y-0 left-0 z-50 bg-neutral-50 transition-transform duration-300 ease-out',
           {
-            'w-full sm:w-94 lg:w-0 lg:-translate-x-100': isMobileNavOpen,
-            'w-0 -translate-x-100': !isMobileNavOpen,
+            'translate-x-0 w-full sm:w-94': isMobileNavOpen,
+            '-translate-x-full w-94': !isMobileNavOpen,
           },
         )}
       >
@@ -121,24 +128,25 @@ const MainNav = ({categories}: MainNavProps) => {
             <Button
               size="small"
               color="secondary"
-              onClick={() => setMobileNavOpen(false)}
+              onClick={closeMobileNav}
+              aria-label="Close menu"
             >
               <RiCloseLargeFill className="text-xl" />
             </Button>
           </div>
+
           <NavItems />
           <ButtonGroup />
         </div>
-      </div>
-      <div
-        className={classNames(
-          'fixed inset-0 h-screen bg-neutral-800/20 z-40 backdrop-blur-[1px] transition-all duration-200 ease-in',
-          {
-            'w-full lg:w-0': isMobileNavOpen,
-            'w-0': !isMobileNavOpen,
-          },
-        )}
-      />
+      </aside>
+
+      {/* ---------------- Overlay ---------------- */}
+      {isMobileNavOpen && (
+        <div
+          onClick={closeMobileNav}
+          className="fixed inset-0 z-40 bg-neutral-800/20 backdrop-blur-[1px]"
+        />
+      )}
     </>
   );
 };
