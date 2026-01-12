@@ -240,6 +240,26 @@ body {
   }
 }
 
+
+@utility container {
+  @apply w-full mx-auto;
+  @variant sm {
+    max-width: 540px;
+  }
+  @variant md {
+    max-width: 720px;
+  }
+  @variant lg {
+    max-width: 960px;
+  }
+  @variant xl {
+    max-width: 1184px;
+  }
+  @variant 2xl {
+    max-width: 1678px;
+  }
+}
+
 @layer utilities {
   .font-poppins {
     font-family: var(--font-poppins, sans-serif);

@@ -8,8 +8,8 @@ const NavItems = () => {
         <li key={navItem.id} className="py-2 px-4">
           <AnimatedLink
             href={navItem.url}
-            className="text-lg  text-secondary-500 font-medium"
-            color="bg-secondary-500"
+            className="text-lg "
+            color='secondary'
             position="center"
           >
             {navItem.label}

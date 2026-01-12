@@ -12,3 +12,11 @@ export interface UserDropDownItem {
   label: string;
   url: string
 }
+
+export interface BreadcrumbNavItem {
+  id: number;
+  title: string;
+  link: string;
+}
+
+export type Color = "primary" | "secondary" | "warning" | "success" | "neutral" | "info";

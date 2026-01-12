@@ -112,36 +112,38 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
   }, []);
 
   return (
-    <div
-      className="relative px-6 flex justify-between items-center w-full max-w-screen"
-      ref={containerRef}
-    >
-      {/* This ul holds the main navigation links */}
-      <ul className="flex items-center gap-3 sm:gap-5">
-        {navItems.map((item, index) => (
-          <li
-            key={item.slug}
-            ref={(el: HTMLLIElement) => {
-              navItemsRef.current[index] = el;
-            }}
-            className="relative group py-1.5"
-          >
-            <AnimatedLink
-              href={`/category/${item.slug}`}
-              color="bg-secondary-900"
-              className={classNames(
-                'text-secondary-800 hover:text-secondary-900 font-normal text-nowrap',
-                {
+    <div className='container'>
+      <div
+        className="relative px-6 flex justify-between items-center w-full max-w-screen"
+        ref={containerRef}
+      >
+        {/* This ul holds the main navigation links */}
+        <ul className="flex items-center gap-3 sm:gap-5">
+          {navItems.map((item, index) => (
+            <li
+              key={item.slug}
+              ref={(el: HTMLLIElement) => {
+                navItemsRef.current[index] = el;
+              }}
+              className="relative group py-1.5"
+            >
+              <AnimatedLink
+                href={`/category/${item.slug}`}
+                color={
+                  pathname.startsWith(`/category/${item.slug}`)
+                    ? 'success'
+                    : 'secondary'
+                }
+                className={classNames('font-normal text-nowrap', {
                   'font-medium text-success-600!': pathname.startsWith(
                     `/category/${item.slug}`,
                   ),
-                },
-              )}
-            >
-              {item.name.slice(0, 90)}
-            </AnimatedLink>
+                })}
+              >
+                {item.name.slice(0, 90)}
+              </AnimatedLink>
 
-            {/* {item.subCategories && (
+              {/* {item.subCategories && (
               <ul className="absolute hidden group-hover:block left-auto top-8 w-50 bg-neutral-100 rounded-lg border border-neutral-200 shadow py-2">
                 {item.subCategories.map((sub) => (
                   <li
@@ -159,52 +161,53 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
                 ))}
               </ul>
             )} */}
-          </li>
-        ))}
+            </li>
+          ))}
 
-        {/* This li contains the "More" dropdown button and menu */}
-        <li
-          ref={moreBtnRef}
-          className="relative"
-          // The `style` attribute is used here to dynamically hide/show the button
-          style={{ display: 'none' }}
-        >
-          <Button
-            onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
-            className="px-0 py-2 items-center gap-2 text-secondary-800 hover:text-secondary-900 font-normal transition-colors hover:bg-transparent duration-200 focus:outline-none"
+          {/* This li contains the "More" dropdown button and menu */}
+          <li
+            ref={moreBtnRef}
+            className="relative"
+            // The `style` attribute is used here to dynamically hide/show the button
+            style={{ display: 'none' }}
           >
-            More
-            <FaAngleDown
-              className={`text-sm transform transition-transform duration-200 ${
-                isMoreDropdownOpen ? 'rotate-180' : ''
-              }`}
-            />
-          </Button>
+            <Button
+              onClick={() => setIsMoreDropdownOpen(!isMoreDropdownOpen)}
+              className="px-0 py-2 items-center gap-2 text-secondary-800 hover:text-secondary-900 font-normal transition-colors hover:bg-transparent duration-200 focus:outline-none"
+            >
+              More
+              <FaAngleDown
+                className={`text-sm transform transition-transform duration-200 ${
+                  isMoreDropdownOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </Button>
 
-          {/* Dropdown Menu */}
-          {isMoreDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-60 bg-neutral-100 border border-neutral-200 rounded-md shadow-lg py-1 z-20 max-h-125 overflow-y-auto overflow-x-hidden">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.slug}
-                  href={`category/${item.slug}`}
-                  ref={(el: HTMLAnchorElement) => {
-                    dropdownItemsRef.current[index] = el;
-                  }}
-                  style={{ display: 'none' }}
-                  className={`block px-4 py-2 sm:py-3 text-primary hover:bg-neutral-300  ${
-                    pathname === `/category/${item.slug}`
-                      ? 'bg-info-200 text-info-600 font-semibold'
-                      : ''
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          )}
-        </li>
-      </ul>
+            {/* Dropdown Menu */}
+            {isMoreDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-60 bg-neutral-100 border border-neutral-200 rounded-md shadow-lg py-1 z-20 max-h-125 overflow-y-auto overflow-x-hidden">
+                {navItems.map((item, index) => (
+                  <Link
+                    key={item.slug}
+                    href={`category/${item.slug}`}
+                    ref={(el: HTMLAnchorElement) => {
+                      dropdownItemsRef.current[index] = el;
+                    }}
+                    style={{ display: 'none' }}
+                    className={`block px-4 py-2 sm:py-3 text-primary hover:bg-neutral-300  ${
+                      pathname === `/category/${item.slug}`
+                        ? 'bg-info-200 text-info-600 font-semibold'
+                        : ''
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

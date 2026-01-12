@@ -1,10 +1,9 @@
 'use client';
 
-import { MouseEvent } from 'react';
 import { FaRegHeart, FaRegEye } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
-import image1 from 'assets/images/products/1.png';
+import image1 from 'assets/images/products/1.webp';
 import { currencyFormat, calculatePrice, reviewSummary } from 'helpers/utils';
 import { Product } from 'types/products';
 import AnimatedLink from 'components/base/AnimateLink';
@@ -91,8 +90,8 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
       <div className="px-1">
         <AnimatedLink
           href="#!"
-          className="mb-2 text-secondary-700 hover:text-secondary-900 font-medium"
-          color="bg-secondary-900"
+          className="mb-2"
+          color="secondary"
         >
           <span className="line-clamp-1">{productItem.title}</span>
         </AnimatedLink>

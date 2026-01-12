@@ -8,7 +8,7 @@ import Subscribe from './Subscribe';
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 dark:bg-[#1c1c1c] px-6 py-6 md:py-10">
-      <div className="container mx-auto">
+      <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20">
           <div className='xl:col-span-2'>
             <div className="mb-6">
@@ -29,8 +29,8 @@ const Footer = () => {
               <FiMail className="text-white text-xl" />
               <AnimatedLink
                 href="mailto:abcd@gmail.com"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 abcd@gmail.com
               </AnimatedLink>
@@ -39,8 +39,8 @@ const Footer = () => {
               <BsTelephone className="text-white text-xl" />
               <AnimatedLink
                 href="tel:+880123455677"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 +880123455677
               </AnimatedLink>
@@ -51,8 +51,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="/profile"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 My Account
               </AnimatedLink>
@@ -60,8 +60,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="/login"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Login
               </AnimatedLink>
@@ -69,8 +69,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="/signup"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Register
               </AnimatedLink>
@@ -78,8 +78,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="/cart"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Cart
               </AnimatedLink>
@@ -87,8 +87,8 @@ const Footer = () => {
             <div className="">
               <AnimatedLink
                 href="/wishlist"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Wishlist
               </AnimatedLink>
@@ -99,8 +99,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="#!"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Privacy Policy
               </AnimatedLink>
@@ -108,8 +108,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="#!"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Terms Of Use
               </AnimatedLink>
@@ -117,8 +117,8 @@ const Footer = () => {
             <div className="mb-4">
               <AnimatedLink
                 href="/about"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 About
               </AnimatedLink>
@@ -126,8 +126,8 @@ const Footer = () => {
             <div className="">
               <AnimatedLink
                 href="/contact"
-                className="text-white font-normal"
-                color="bg-white"
+                className="font-normal"
+                color="white"
               >
                 Contact
               </AnimatedLink>
