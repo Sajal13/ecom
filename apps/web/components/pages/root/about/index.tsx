@@ -1,22 +1,8 @@
-import { BreadcrumbNavItem } from 'types/common';
 import BreadcrumbContainer from 'components/common/BreadcrumbContainer';
 import Highlights from 'components/common/Highlights';
 import Clients from './Clients';
 import Info from './Info';
 import OurStory from './OurStory';
-
-const navItems: BreadcrumbNavItem[] = [
-  {
-    id: 1,
-    title: 'Home',
-    link: '/',
-  },
-  {
-    id: 2,
-    title: 'About',
-    link: '',
-  },
-];
 
 const AboutContainer = () => {
   return (
