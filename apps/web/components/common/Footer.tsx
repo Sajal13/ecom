@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className="bg-neutral-900 dark:bg-[#1c1c1c] px-6 py-6 md:py-10">
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-7 md:gap-8 lg:gap-10 xl:gap-12">
           <div className='xl:col-span-2'>
             <div className="mb-6">
               <Logo />

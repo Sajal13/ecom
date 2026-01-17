@@ -5,6 +5,7 @@ import { FaCartShopping } from 'react-icons/fa6';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import classNames from 'classnames';
+import { useNavbar } from 'lib/zustand/useNavbar';
 import { Category } from 'types/products';
 import Button from 'components/base/Buttons';
 import Logo from 'components/common/Logo';
@@ -21,10 +22,9 @@ interface MainNavProps {
 const MAX_SCROLL = 300;
 
 const MainNav = ({ categories }: MainNavProps) => {
+  const { isMobileNavOpen, openMobileNav, closeMobileNav } = useNavbar();
   const [alpha, setAlpha] = useState(0);
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-
 
   /* ---------------- Scroll Background Effect ---------------- */
 
@@ -47,16 +47,11 @@ const MainNav = ({ categories }: MainNavProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  /* ---------------- Handlers ---------------- */
-
-  const openMobileNav = useCallback(() => setMobileNavOpen(true), []);
-  const closeMobileNav = useCallback(() => setMobileNavOpen(false), []);
-
   const hasShadow = alpha > 0.1;
 
   /* ---------------- Render ---------------- */
 
-   useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
@@ -78,7 +73,7 @@ const MainNav = ({ categories }: MainNavProps) => {
           backgroundColor: `rgba(var(--background-rgb), ${alpha})`,
         }}
       >
-        <nav className="h-20 container flex items-center justify-between px-6">
+        <nav className="h-20 container flex items-center justify-between">
           {/* Logo */}
           <Suspense fallback={<LoadingAnimation />}>
             <Logo />

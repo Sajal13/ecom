@@ -1,5 +1,8 @@
 import { BreadcrumbNavItem } from 'types/common';
-import Breadcrumb from 'components/base/Breadcrumb';
+import BreadcrumbContainer from 'components/common/BreadcrumbContainer';
+import Highlights from 'components/common/Highlights';
+import Clients from './Clients';
+import Info from './Info';
 import OurStory from './OurStory';
 
 const navItems: BreadcrumbNavItem[] = [
@@ -17,10 +20,13 @@ const navItems: BreadcrumbNavItem[] = [
 
 const AboutContainer = () => {
   return (
-    <div className="py-10 md:py-16 lg:py-20 container px-6 relative">
-      <Breadcrumb navItems={navItems} className='mb-6 md:mb-10' />
+    <section className="py-10 md:py-16 lg:py-20 container">
+      <BreadcrumbContainer className="mb-6 md:mb-10" />
       <OurStory />
-    </div>
+      <Info />
+      <Clients />
+      <Highlights />
+    </section>
   );
 };
 

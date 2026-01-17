@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { IconType } from "react-icons/lib";
 
 export interface NavItem {
   id: number;
@@ -20,3 +21,11 @@ export interface BreadcrumbNavItem {
 }
 
 export type Color = "primary" | "secondary" | "warning" | "success" | "neutral" | "info";
+
+
+export interface Highlight {
+  id: number;
+  title: string;
+  description: string;
+  icon: IconType;
+}

@@ -114,7 +114,7 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
   return (
     <div className='container'>
       <div
-        className="relative px-6 flex justify-between items-center w-full max-w-screen"
+        className="relative flex justify-between items-center w-full max-w-screen"
         ref={containerRef}
       >
         {/* This ul holds the main navigation links */}

@@ -3,18 +3,21 @@ import Image1 from 'assets/images/illustration/1.webp';
 
 const OurStory = () => {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-6 md:gap-10 lg:gap-20">
-      <div className='lg:order-1'>
+    <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-6 md:gap-10 lg:gap-20">
+      <div className="lg:order-1 w-full h-80 md:h-125 max-h-125 overflow-hidden relative">
         <Image
           src={Image1}
           alt=""
-          width={700}
-          height={600}
-          className='rounded-sm'
+          fill
+          loading="eager"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="rounded-sm object-cover object-top lg:object-center"
         />
       </div>
       <div>
-        <h1 className="font-semibold mb-6 md:mb-10 tracking-wide">Our Story</h1>
+        <h1 className="font-semibold mb-6 md:mb-10 tracking-wide text-4xl md:text-5xl lg:text-[3.375rem]">
+          Our Story
+        </h1>
         <p className="mb-4 md:mb-6 text-justify">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
           minima sint iste maiores asperiores dignissimos inventore id vel,
@@ -31,7 +34,7 @@ const OurStory = () => {
           suscipit? Consequatur, fugiat magni?
         </p>
       </div>
-    </section>
+    </div>
   );
 };
 

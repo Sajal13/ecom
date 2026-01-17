@@ -3,7 +3,7 @@ import Button from 'components/base/Buttons';
 
 const NotFound = () => {
   return (
-    <div className=" container mx-auto h-screen flex justify-center items-center px-2">
+    <div className=" container mx-auto h-screen flex justify-center items-center">
       <div className="text-center flex flex-col justify-center items-center">
         <h1 className="text-5xl sm:text-7xl md:text-8xl mb-6 md:mb-8 lg:mb-10 sm:tracking-wide">
           404 Not Found

@@ -111,7 +111,7 @@
   --border: var(--color-neutral-300);
   --text-primary: var(--color-secondary-900);
   --text-secondary: var(--color-secondary-500);
-  --background-rgb: 255, 255, 255,;
+  --background-rgb: 255, 255, 255;
 }
 
 .dark {
@@ -202,7 +202,7 @@
   --color-info-900: #dbeafe;
 
   --border: var(--color-neutral-400);
-  --background-rgb: 12,12,12;
+  --background-rgb: 12, 12, 12;
 }
 
 body {
@@ -240,9 +240,8 @@ body {
   }
 }
 
-
 @utility container {
-  @apply w-full mx-auto;
+  @apply w-full mx-auto px-6;
   @variant sm {
     max-width: 540px;
   }
@@ -266,5 +265,24 @@ body {
   }
   .font-roboto {
     font-family: var(--font-roboto, sans-serif);
+  }
+}
+
+@layer components {
+  .swiper-theme-container {
+    .custom-swiper-pagination {
+      transition: all 0.3s;
+
+      .swiper-pagination-bullet {
+        @apply h-3 w-3 bg-secondary-400 rounded-full;
+      }
+      .swiper-pagination-bullet-active {
+        @apply relative w-4 h-4 p-1;
+        &:after {
+          @apply content-[''] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+          w-2.5 h-2.5 rounded-full border border-neutral-100 bg-primary-500;
+        }
+      }
+    }
   }
 }

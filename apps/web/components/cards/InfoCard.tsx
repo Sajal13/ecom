@@ -4,26 +4,27 @@ import { twMerge } from 'tailwind-merge';
 import { Color, Size } from 'components/base/Buttons';
 
 interface InfoCardProps {
-  color: Color;
-  size?: Size;
+  color?: Color;
+  size?: Size | 'full';
   border?: boolean;
   className?: string;
 }
 
 const InfoCard = ({
-  color,
+  color = 'neutral',
   size = 'medium',
   border = false,
   className,
   children,
 }: PropsWithChildren<InfoCardProps>) => {
-  const baseClass = `flex items-center justify-center transition-all 
+  const baseClass = `flex items-center justify-center transition-all group 
   duration-200 ease-linear`;
 
-  const sizeClass: Record<Size, string> = {
-    small: `min-w-42.5 min-h-36.25 px-4 py-3 rounded-sm`,
-    medium: `min-w-67.5 min-h-65 py-8 px-9 rounded-md`,
-    large: `min-w-80 min-h-79 py-10 px-11 rounded-lg`,
+  const sizeClass: Record<Size | 'full', string> = {
+    small: `w-full min-h-36.25 p-4 rounded-sm`,
+    medium: `w-full min-h-65 p-6 rounded-md`,
+    large: `w-full min-h-79 p-6 rounded-lg`,
+    full: `w-full h-full p-6 rounded-md`,
   };
 
   const colorClass: Record<Color | 'neutral', string> = {

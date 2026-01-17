@@ -1,26 +1,52 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaRegHeart, FaUser } from 'react-icons/fa';
 import { FaCartShopping } from 'react-icons/fa6';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { dropdownItems } from 'data/common';
+import { useNavbar } from 'lib/zustand/useNavbar';
 import Button from 'components/base/Buttons';
 import ThemeTogglerButton from './ThemeTogglerButton';
 
+/* -----------------------------
+  Helpers
+------------------------------*/
+const isDesktop = () =>
+  typeof window !== 'undefined' && window.innerWidth >= 1024;
+
+/* -----------------------------
+  Button Group
+------------------------------*/
 interface ButtonGroupProps {
   className?: string;
-  isMobileNavOpen?: boolean;
-  setMobileNavOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 const ButtonGroup = ({ className }: ButtonGroupProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const { closeMobileNav } = useNavbar();
+
   /* -----------------------------
-   Close dropdown on outside click
+     Handlers
+  ------------------------------*/
+  const handleUserButtonClick = () => {
+    if (!isDesktop()) {
+      setIsOpen((prev) => !prev);
+    }
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    if (!isDesktop()) {
+      closeMobileNav();
+    }
+  };
+
+  /* -----------------------------
+     Close dropdown on outside click
   ------------------------------*/
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -43,13 +69,15 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
         className,
       )}
     >
-      <Link href="/wishlist">
+      {/* Wishlist */}
+      <Link href="/wishlist" onClick={handleLinkClick}>
         <Button size="small" shape="circle" color="secondary">
           <FaRegHeart className="text-xl" />
         </Button>
       </Link>
 
-      <Link href="/cart">
+      {/* Cart */}
+      <Link href="/cart" onClick={handleLinkClick}>
         <Button
           size="small"
           shape="circle"
@@ -60,27 +88,23 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
         </Button>
       </Link>
 
+      {/* Theme toggle (desktop only) */}
       <div className="max-lg:hidden">
         <ThemeTogglerButton />
       </div>
 
-      {/* USER DROPDOWN */}
-      <div
-        ref={wrapperRef}
-        className="relative group"
-        onMouseEnter={() => window.innerWidth >= 1024 && setIsOpen(true)}
-        onMouseLeave={() => window.innerWidth >= 1024 && setIsOpen(false)}
-      >
+      {/* User Dropdown */}
+      <div ref={wrapperRef} className="relative group">
         <Button
           size="small"
           shape="circle"
           color="secondary"
-          onClick={() => window.innerWidth < 1024 && setIsOpen((p) => !p)}
+          onClick={handleUserButtonClick}
         >
           <FaUser className="text-xl" />
         </Button>
 
-        <AvatarDropdown isOpen={isOpen} />
+        <AvatarDropdown isOpen={isOpen} onLinkClick={handleLinkClick} />
       </div>
     </div>
   );
@@ -88,22 +112,40 @@ const ButtonGroup = ({ className }: ButtonGroupProps) => {
 
 export default ButtonGroup;
 
-const AvatarDropdown = ({ isOpen }: { isOpen: boolean }) => {
-  if (!isOpen) return null;
+/* -----------------------------
+  Avatar Dropdown
+------------------------------*/
+interface AvatarDropdownProps {
+  isOpen: boolean;
+  onLinkClick: () => void;
+}
 
+const AvatarDropdown = ({ isOpen, onLinkClick }: AvatarDropdownProps) => {
   return (
     <div
-      className="
-        absolute right-0 top-10 z-50 mt-2 w-64 rounded-xl px-5 py-4 lg:group-hover:block bg-neutral-50
-        backdrop-blur-md shadow-lg max-lg:bottom-12 max-lg:top-auto before:content-[''] before:h-5 before:w-40  
-        before:bg-transparent before:-z-10 before:absolute before:-top-4 before:right-0
-      "
+      className={classNames(
+        `
+        absolute right-0 top-10 z-50 mt-2 w-64 rounded-xl px-5 py-4 max-lg:bottom-12 max-lg:top-auto
+        bg-neutral-50 shadow-lg backdrop-blur-md  before:content-[''] before:h-5 before:w-40  
+        before:bg-transparent before:-z-10 before:absolute before:-top-4 before:right-0 
+        transition-all duration-150
+        `,
+        {
+          'lg:opacity-0 lg:invisible lg:pointer-events-none': true,
+          'lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:pointer-events-auto': true,
+          'max-lg:opacity-100 max-lg:visible max-lg:pointer-events-auto':
+            isOpen,
+          'max-lg:opacity-0 max-lg:invisible max-lg:pointer-events-none':
+            !isOpen,
+        },
+      )}
     >
       <ul className="flex flex-col gap-4">
         {dropdownItems.map((item) => (
           <li key={item.id}>
             <Link
               href={item.url}
+              onClick={onLinkClick}
               className="
                 flex items-center text-sm text-secondary-600
                 hover:text-secondary-800 transition

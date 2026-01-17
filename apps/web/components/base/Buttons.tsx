@@ -105,7 +105,7 @@ const Button = ({
       filled:
         'bg-neutral-500 text-white border border-neutral-500 hover:bg-neutral-700 hover:border-neutral-700',
       outlined: 'border border-neutral-500 text-neutral-500 hover:bg-neutral-500 hover:text-white',
-      text: 'border-0 bg-transparent text-info-500 hover:bg-info-50',
+      text: 'border-0 bg-transparent text-neutral-500 hover:bg-neutral-50',
     },
   };
 
