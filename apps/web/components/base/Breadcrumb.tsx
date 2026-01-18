@@ -20,7 +20,7 @@ const Breadcrumb = ({
   }
 
   return (
-    <nav className={classNames('flex mb-4', className)} aria-label="Breadcrumb">
+    <nav className={classNames('flex mb-6 md:mb-10 lg:mb-16', className)} aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-2 md:space-x-4">
         {navItems.slice(0, navItems.length - 1).map((breadcrumb) => (
           <li key={breadcrumb.id} className="inline-flex items-center">

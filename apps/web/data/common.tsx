@@ -4,6 +4,8 @@ import { FaRegStar } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
 import { FaHeadset, FaTruckFast } from "react-icons/fa6";
 
+export const BD_PHONE_REGEX = /^(?:\+8801|8801|01)[0-9]{9}$/;
+
 export const mainNavItems: NavItem[] = [
   {
     id: 1,

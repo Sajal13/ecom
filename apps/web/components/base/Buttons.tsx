@@ -45,9 +45,9 @@ const Button = ({
     focus:outline-none transition-all border duration-200 cursor-pointer`;
 
   const sizeClasses: Record<Size, string> = {
-    small: 'px-3 py-1.5 text-sm rounded-sm',
-    medium: 'px-12 py-4 text-base rounded-md',
-    large: 'px-5 py-2.5 text-lg rounded-lg',
+    small: 'px-3 py-1.5 md:py-2.5 text-sm rounded-sm',
+    medium: 'px-12 py-2 md:py-4 text-base rounded-md',
+    large: 'px-5 py-3 md:py-4 text-lg rounded-lg',
   };
 
   const shapeClasses: Record<Shape, Record<Size, string>> = {

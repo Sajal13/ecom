@@ -78,7 +78,7 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
             </div>
           )}
         </div>
-        <div className="h-0 w-full absolute bottom-0 left-0 group-hover:h-10.5 group-hover:rounded-b-md transition-all duration-200 ease-linear overflow-hidden">
+        <div className="h-0 w-full absolute bottom-0 left-0 group-hover:h-14 group-hover:rounded-b-md transition-all duration-200 ease-linear overflow-hidden">
           <Button
             onClick={handleAddToCartClick}
             className="py-2 w-full bg-secondary-800 text-secondary-50 hover:bg-secondary-900"

@@ -1,6 +1,5 @@
 import { z } from 'zod';
-
-const bdPhoneRegex = /^(?:\+8801|8801|01)[0-9]{9}$/;
+import { BD_PHONE_REGEX } from 'data/common';
 
 export const signupSchema = z
   .object({
@@ -8,7 +7,7 @@ export const signupSchema = z
     emailOrPhone: z
       .string()
       .refine(
-        (value) => z.email().safeParse(value).success || bdPhoneRegex.test(value),
+        (value) => z.email().safeParse(value).success || BD_PHONE_REGEX.test(value),
         'Enter a valid email or Bangladeshi phone number',
       ),
     password: z
@@ -31,7 +30,7 @@ export const loginSchema = z.object({
   emailOrPhone: z
     .string()
     .refine(
-      (value) => z.email().safeParse(value).success || bdPhoneRegex.test(value),
+      (value) => z.email().safeParse(value).success || BD_PHONE_REGEX.test(value),
       'Enter a valid email or Bangladeshi phone number',
     ),
   password: z
@@ -49,7 +48,7 @@ export const forgotPasswordSchema = z.object({
   emailOrPhone: z
     .string()
     .refine(
-      (value) => z.string().email().safeParse(value).success || bdPhoneRegex.test(value),
+      (value) => z.string().email().safeParse(value).success || BD_PHONE_REGEX.test(value),
       'Enter a valid email or Bangladeshi phone number',
     ),
 });

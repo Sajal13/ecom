@@ -8,7 +8,7 @@ const Highlights = () => {
     <section className="pt-10 md:pt-16 lg:pt-20 container">
       <div className="flex flex-wrap justify-center items-center gap-4 flex-col md:flex-row">
         {highlights.map((highlight) => (
-          <InfoCard key={highlight.id} className='max-w-65 hover:bg-neutral-100 p-0'>
+          <InfoCard key={highlight.id} className='max-w-65 bg-transparent hover:bg-neutral-100 p-0'>
             <div className="text-center flex flex-col items-center justify-center">
               <div className="h-20 w-20 bg-secondary-400 rounded-full p-3 mb-6">
                 <div
