@@ -5,7 +5,7 @@ import InfoCard from 'components/cards/InfoCard';
 
 const Info = () => {
   return (
-    <div className="py-10 md:py-16 lg:py-20 container">
+    <div className="py-10 md:py-16 lg:py-20 container px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6 xl:gap-8 place-items-center">
         {infoItems.map((item) => (
           <InfoCard key={item.id}  border>

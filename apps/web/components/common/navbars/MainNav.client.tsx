@@ -73,7 +73,7 @@ const MainNav = ({ categories }: MainNavProps) => {
           backgroundColor: `rgba(var(--background-rgb), ${alpha})`,
         }}
       >
-        <nav className="h-20 container flex items-center justify-between">
+        <nav className="h-20 container px-6 flex items-center justify-between">
           {/* Logo */}
           <Suspense fallback={<LoadingAnimation />}>
             <Logo />

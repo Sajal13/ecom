@@ -43,7 +43,7 @@ export default function AnimatedLink({
     success: 'text-success-700 hover:text-success-900',
     neutral: 'text-neutral-700 hover:text-neutral-900',
     info: 'text-info-700 hover:text-info-900',
-    white: 'text-white hover:text-neutral-200',
+    white: 'text-white hover:text-gray-300',
   };
 
   const baseClass =

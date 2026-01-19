@@ -8,7 +8,7 @@ import ClientCard from 'components/cards/ClientCard';
 
 const Clients = () => {
   return (
-    <div className="py-10 md:py-14 lg:py-16 container">
+    <div className="py-10 md:py-14 lg:py-16 container px-6">
       <Swiper
         autoplay={{
           delay: 5000,

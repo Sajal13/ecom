@@ -241,7 +241,7 @@ body {
 }
 
 @utility container {
-  @apply w-full mx-auto px-6;
+  @apply w-full mx-auto;
   @variant sm {
     max-width: 540px;
   }

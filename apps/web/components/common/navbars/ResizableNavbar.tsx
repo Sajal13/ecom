@@ -112,7 +112,7 @@ const ResizableNavbar = ({ navItems }: ResizableNavProps) => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container px-6'>
       <div
         className="relative flex justify-between items-center w-full max-w-screen"
         ref={containerRef}

@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import 'swiper/css';
 import { Pagination } from 'swiper/modules';
 import { PaginationOptions } from 'swiper/types';
+import { twMerge } from 'tailwind-merge';
 
 interface SwiperProps extends ReactSwiperProps {
   navigationPosition?: React.CSSProperties;
@@ -29,6 +30,23 @@ const Swiper = ({
 }: PropsWithChildren<SwiperProps>) => {
   const paginationRef = useRef<HTMLDivElement | null>(null);
 
+  const paginationClass = twMerge(
+    'custom-swiper-pagination',
+    'absolute',
+    'top-full',
+    'left-1/2',
+    '-translate-x-1/2',
+    'rounded-full',
+    'flex',
+    'justify-center',
+    'items-center',
+    'gap-2',
+    'cursor-pointer',
+    'z-10',
+    'mt-10',
+    paginationClassName
+  )
+
   return (
     <div
       className={classNames(
@@ -39,11 +57,7 @@ const Swiper = ({
       {pagination && (
         <div
           ref={paginationRef}
-          className={classNames(
-            `custom-swiper-pagination absolute top-full left-1/2 -translate-x-1/2 
-            rounded-full flex justify-center items-center gap-2 cursor-pointer z-10 mt-10`,
-            paginationClassName,
-          )}
+          className={paginationClass}
         ></div>
       )}
       <ReactSwiper

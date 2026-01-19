@@ -5,7 +5,7 @@ import InfoCard from 'components/cards/InfoCard';
 
 const Highlights = () => {
   return (
-    <section className="pt-10 md:pt-16 lg:pt-20 container">
+    <section className="pt-10 md:pt-16 lg:pt-20 container px-6">
       <div className="flex flex-wrap justify-center items-center gap-4 flex-col md:flex-row">
         {highlights.map((highlight) => (
           <InfoCard key={highlight.id} className='max-w-65 bg-transparent hover:bg-neutral-100 p-0'>
