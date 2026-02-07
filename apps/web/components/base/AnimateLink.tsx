@@ -33,6 +33,7 @@ export default function AnimatedLink({
     success: 'bg-success-800',
     neutral: 'bg-neutral-800',
     info: 'bg-info-800',
+    danger: 'bg-danger-800',
     white: 'bg-white',
   };
 
@@ -43,6 +44,7 @@ export default function AnimatedLink({
     success: 'text-success-700 hover:text-success-900',
     neutral: 'text-neutral-700 hover:text-neutral-900',
     info: 'text-info-700 hover:text-info-900',
+    danger: 'text-danger-800 hover:text-danger-900',
     white: 'text-white hover:text-gray-300',
   };
 

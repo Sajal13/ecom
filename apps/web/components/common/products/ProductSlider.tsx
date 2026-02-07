@@ -104,7 +104,7 @@ const ProductSlider = ({
         </div>
       )}
 
-      <div className="flex justify-between items-end lg:items-center mb-7 md:mb-9 lg:mb-10">
+      <div className="flex flex-wrap justify-between items-end lg:items-center gap-4 mb-7 md:mb-9 lg:mb-10">
         <div
           className={classNames({
             'flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-10 xl:gap-20':

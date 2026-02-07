@@ -20,7 +20,9 @@ export interface BreadcrumbNavItem {
   link: string;
 }
 
-export type Color = "primary" | "secondary" | "warning" | "success" | "neutral" | "info";
+export type Color = "primary" | "secondary" | "warning" | "success" | "neutral" | "info" | "danger";
+export type Size = 'small' | 'medium' | 'large';
+export type Shape = 'square' | 'circle';
 
 
 export interface Highlight {

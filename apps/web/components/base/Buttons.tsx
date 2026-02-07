@@ -42,7 +42,7 @@ const Button = ({
   ...rest
 }: PropsWithChildren<ButtonProps>) => {
   const baseClass = `flex items-center justify-center font-medium 
-    focus:outline-none transition-all border duration-200 cursor-pointer`;
+    focus:outline-none transition-all border duration-200 cursor-pointer text-nowrap`;
 
   const sizeClasses: Record<Size, string> = {
     small: 'px-3 py-1.5 md:py-2.5 text-sm rounded-sm',

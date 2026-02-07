@@ -1,19 +1,29 @@
+'use client';
+
 import { PropsWithChildren } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Duration } from 'dayjs/plugin/duration';
-import Button, { Color, Shape, Size, Type, Variant } from 'components/base/Buttons';
+import Button, { Color, Shape, Size, Variant } from 'components/base/Buttons';
 import CountDown from '../CountDown';
+
+interface ShowCountdown {
+  show: boolean;
+  shape?: Shape;
+  color?: Color;
+  size?: Size;
+}
 
 interface ProductListProps {
   title: string;
   titleClassName?: string;
   subTitle?: string;
   subTitleClassName?: string;
-  showCountdown?: boolean;
+  showCountdown?: ShowCountdown;
+  showButton?: boolean;
   timeDuration?: Duration;
-  url: string;
-  buttonText: string;
+  url?: string;
+  buttonText?: string;
   buttonClass?: string;
   variant?: Variant;
   color?: Color;
@@ -26,7 +36,8 @@ const ProductList = ({
   titleClassName,
   subTitle,
   subTitleClassName,
-  showCountdown = false,
+  showCountdown,
+  showButton = true,
   url = '#!',
   timeDuration,
   buttonText = 'View All',
@@ -42,27 +53,53 @@ const ProductList = ({
       {subTitle && (
         <div className="flex items-center gap-2.5 mb-2.5 md:mb-3 lg:mb-4">
           <div className="w-5 h-8 bg-primary-500 rounded-md" />
-          <p className={classNames('font-medium flex-1 text-primary-500', subTitleClassName)}>
+          <p
+            className={classNames(
+              'font-medium flex-1 text-primary-500',
+              subTitleClassName,
+            )}
+          >
             {subTitle}
           </p>
         </div>
       )}
-      <div className="flex justify-between items-center mb-7 md:mb-9 lg:mb-10">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-end lg:items-center mb-7 md:mb-9 lg:mb-10 gap-6">
         <div
           className={classNames({
-            'flex flex-col md:flex-row items-center gap-8 md:gap-10 lg:gap-20': showCountdown,
+            'flex flex-wrap flex-col lg:flex-row lg:items-center gap-4 lg:gap-10 xl:gap-20':
+              showCountdown,
           })}
         >
-          <h3 className={classNames('text-2xl md:text-3xl lg:text-4xl', titleClassName)}>
+          <h3
+            className={classNames(
+              'text-2xl md:text-3xl lg:text-4xl',
+              titleClassName,
+            )}
+          >
             {title}
           </h3>
-          {showCountdown && <CountDown timeDuration={timeDuration} />}
+          {showCountdown?.show && (
+            <CountDown
+              timeDuration={timeDuration}
+              shape={showCountdown.shape}
+              size={showCountdown.size}
+              color={showCountdown.color}
+            />
+          )}
+        </div>
+        {showButton && (
           <Link href={url}>
-            <Button color={color} variant={variant} shape={shape} size={size} className={buttonClass}>
+            <Button
+              color={color}
+              variant={variant}
+              shape={shape}
+              size={size}
+              className={buttonClass}
+            >
               {buttonText}
             </Button>
           </Link>
-        </div>
+        )}
       </div>
       {children}
     </>

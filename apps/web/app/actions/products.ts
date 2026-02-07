@@ -17,7 +17,7 @@ export const getProducts = async ({
   if (select) params.set('select', select.join(','));
   if (q) params.set('q', q);
 
-  const url = `https://dummyjson.com/products${params.toString() ? `?${params.toString()}` : ''}`;
+  const url = `${process.env.BASE_URL}/products${params.toString() ? `?${params.toString()}` : ''}`;
 
   const res = await fetch(url, {
     headers: {
@@ -36,12 +36,39 @@ export const getCategories = async () => {
   'use cache';
   cacheLife('seconds');
 
-  const response = await fetch(`https://dummyjson.com/products/categories`, {
+  const response = await fetch(`${process.env.BASE_URL}/products/categories`, {
     method: 'GET',
     headers: {
       'Content-type': 'application/json',
     },
   });
 
+  return response.json();
+};
+
+export const getHighlightedItem = async () => {
+  'use cache';
+  cacheLife('seconds');
+
+  const response = await fetch(`${process.env.BASE_URL}/products/1`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  return response.json();
+};
+
+export const getNewArrivalItem = async () => {
+  'use cache';
+  cacheLife('seconds');
+
+  const response = await fetch(`${process.env.BASE_URL}/products`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
   return response.json();
 };

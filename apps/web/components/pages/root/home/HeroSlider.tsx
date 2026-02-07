@@ -28,7 +28,7 @@ const HeroSlider = ({ products }: HeroSliderProps) => {
       >
         {products.map((product) => (
           <SwiperSlide key={product.id}>
-            <div className="min-h-86 bg-neutral-900/15 grid grid-cols-1 md:grid-cols-2 place-items-center gap-4 md:gap-6 py-10 px-6 md:py-12 md:px-8 rounded-md">
+            <div className="min-h-86  grid grid-cols-1 md:grid-cols-2 place-items-center gap-4 md:gap-6 py-10 px-6 md:py-12 md:px-8 rounded-md">
               <div>
                 <p className='text-sm mb-8'>New Arrival ❤️</p>
                 <h4 className="text-2xl md:text-3xl mb-4 max-w-md">

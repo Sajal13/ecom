@@ -218,21 +218,45 @@ body {
 @layer base {
   h1 {
     @apply text-[length:var(--h1-font-size)] leading-(--h1-line-height) font-semibold mb-1;
+
+    @variant max-xl {
+      font-size: calc(2.375rem + 1.739vw);
+    }
   }
   h2 {
     @apply text-[length:var(--h2-font-size)] leading-(--h2-line-height) font-semibold mb-1;
+
+    @variant max-xl {
+      font-size: calc(2em + 1.522vw);
+    }
   }
   h3 {
     @apply text-[length:var(--h3-font-size)] leading-(--h3-line-height) font-medium mb-1;
+
+    @variant max-xl {
+      font-size: calc(1.75rem + 0.87vw);
+    }
   }
   h4 {
     @apply text-[length:var(--h4-font-size)] leading-(--h4-line-height) font-medium mb-1;
+
+    @variant max-xl {
+      font-size: calc(1.5rem + 0.696vw);
+    }
   }
   h5 {
     @apply text-[length:var(--h5-font-size)] leading-(--h5-line-height) font-medium mb-1;
+
+    @variant max-xl {
+      font-size: calc(1.25rem + 0.435vw);
+    }
   }
   h6 {
     @apply text-[length:var(--h6-font-size)] leading-(--h6-line-height) font-medium mb-1;
+
+    @variant max-xl {
+      font-size: calc(1.125rem + 0.217vw);
+    }
   }
 
   input {
