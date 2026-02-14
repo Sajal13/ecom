@@ -7,7 +7,7 @@ import LocationMapContainer from './LocationMapContainer';
 
 const ContactContainer = () => {
   return (
-    <section className="py-10 md:py-16 lg:py-20 container px-6">
+    <section className="">
       <BreadcrumbContainer />
       <div className="grid grid-cols-1 xl:grid-cols-6 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
         <ContactInfo />

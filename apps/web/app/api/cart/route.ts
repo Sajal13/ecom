@@ -1,17 +1,28 @@
 import { NextResponse } from 'next/server';
-import { getSearchProducts } from 'actions/products'; // adjust path if needed
+import { getCartItems } from 'actions/products'; // adjust path if needed
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const q = searchParams.get('q');
 
-    if (!q || q.length < 1) {
+    const skipParam = searchParams.get('skip');
+
+    if (!skipParam) {
       return NextResponse.json({ products: [] });
     }
 
-    const data = await getSearchProducts({
-      q,
+    const skip = Number(skipParam);
+
+    if (isNaN(skip)) {
+      return NextResponse.json(
+        { error: 'Invalid skip value' },
+        { status: 400 }
+      );
+    }
+
+    const data = await getCartItems({
+      userId: 33,
+      skip,
       limit: 10,
     });
 
@@ -25,3 +36,4 @@ export async function GET(req: Request) {
     );
   }
 }
+

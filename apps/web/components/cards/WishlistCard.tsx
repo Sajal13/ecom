@@ -1,35 +1,26 @@
 'use client';
 
-import { FaRegHeart, FaRegEye } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import Image from 'next/image';
 import Link from 'next/link';
 import image1 from 'assets/images/products/1.webp';
-import classNames from 'classnames';
-import { currencyFormat, calculatePrice, reviewSummary } from 'helpers/utils';
+import { currencyFormat, calculatePrice } from 'helpers/utils';
 import { Product } from 'types/products';
 import AnimatedLink from 'components/base/AnimateLink';
 import Button from 'components/base/Buttons';
-import Rating from 'components/base/Rating';
 
-interface ProductCardProps {
+interface WishlistCardProps {
   productItem: Product;
 }
 
-const ProductCard = ({ productItem }: ProductCardProps) => {
+const WishlistCard = ({ productItem }: WishlistCardProps) => {
   const { originalPrice, discountPercentage, discountedPrice } = calculatePrice(
     productItem.price,
     productItem.discountPercentage || 0,
   );
-  const { totalReviewCount, averageRating } = reviewSummary(
-    productItem.reviews || [],
-  );
 
-  const handleWhitelistClick = () => {
+  const handleRemoveClicked = () => {
     console.log('whitelist button clicked....');
-  };
-
-  const handleQuickViewClick = () => {
-    console.log('quick view button clicked');
   };
 
   const handleAddToCartClick = () => {
@@ -56,17 +47,9 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
             shape="circle"
             size="small"
             className="mb-2 bg-neutral-50 hover:bg-neutral-300 text-primary p-1"
-            onClick={handleWhitelistClick}
+            onClick={handleRemoveClicked}
           >
-            <FaRegHeart className="text-xl" />
-          </Button>
-          <Button
-            shape="circle"
-            size="small"
-            className="mb-2 bg-neutral-50 hover:bg-neutral-300 text-primary"
-            onClick={handleQuickViewClick}
-          >
-            <FaRegEye className="text-xl" />
+            <RiDeleteBin6Line className="text-xl" />
           </Button>
         </div>
         <div className="absolute left-3 top-3 z-10">
@@ -95,39 +78,20 @@ const ProductCard = ({ productItem }: ProductCardProps) => {
           <span className="line-clamp-1">{productItem.title}</span>
         </AnimatedLink>
         <div className="flex gap-3 items-center">
-          {discountedPrice && (
-            <p className="text-primary-500 font-medium">
-              {currencyFormat(discountedPrice, {
-                maximumFractionDigits: 1,
-              })}
-            </p>
-          )}
+          <p className="text-primary-500 font-medium">
+            {currencyFormat(discountedPrice, {
+              maximumFractionDigits: 1,
+            })}
+          </p>
           {originalPrice && (
-            <p
-              className={classNames('text-secondary-600 font-medium', {
-                'line-through': discountedPrice,
-              })}
-            >
+            <p className="line-through text-secondary-600 font-medium">
               {currencyFormat(originalPrice, { maximumFractionDigits: 1 })}
             </p>
           )}
         </div>
-        {productItem.rating && (
-          <div className="mt-4 flex items-center gap-2">
-            <Rating
-              rating={averageRating}
-              size="large"
-              step={0.5}
-              className="text-warning-400 pointer-events-none"
-            />
-            <span className="text-secondary-800 text-sm">
-              ({totalReviewCount})
-            </span>
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default WishlistCard;

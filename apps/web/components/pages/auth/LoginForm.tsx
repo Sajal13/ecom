@@ -62,8 +62,8 @@ const LoginForm = () => {
       <div className="mt-4 text-end">
         <AnimatedLink
           href="/forgot-password"
-          className="text-sm text-secondary-900 font-medium"
-          color="bg-secondary-900"
+          className="text-sm font-medium"
+          color="secondary"
           position="right"
         >
           Forgot Password?
@@ -81,8 +81,8 @@ const LoginForm = () => {
         Don't have an account?{' '}
         <AnimatedLink
           href="/signup"
-          className="text-secondary-900 ml-2 font-medium"
-          color="bg-secondary-900"
+          className="ml-2 font-medium"
+          color="secondary"
         >
           Sign up
         </AnimatedLink>

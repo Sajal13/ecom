@@ -41,7 +41,7 @@ const Button = ({
   ref,
   ...rest
 }: PropsWithChildren<ButtonProps>) => {
-  const baseClass = `flex items-center justify-center font-medium 
+  const baseClass = `flex items-center justify-center font-medium  
     focus:outline-none transition-all border duration-200 cursor-pointer text-nowrap`;
 
   const sizeClasses: Record<Size, string> = {

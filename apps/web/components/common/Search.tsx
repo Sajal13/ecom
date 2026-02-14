@@ -104,6 +104,7 @@ const SearchFAB = () => {
     if (!open) return;
 
     const t = setTimeout(() => {
+      reset();
       formRef.current?.querySelector<HTMLInputElement>('input')?.focus();
     }, 150);
 
@@ -141,6 +142,10 @@ const SearchFAB = () => {
     return () => debouncedSearch.cancel();
   }, []);
 
+  useEffect(() => {
+    setSearchedProduct([]);
+    setSearchQuery('');
+  }, [open])
   /* ------------------ Render ------------------ */
 
   return (
@@ -150,10 +155,10 @@ const SearchFAB = () => {
         <div
           className={classNames(
             `absolute right-17 sm:right-27 bottom-full mb-3 w-64 max-h-80 overflow-y-auto overflow-x-hidden
-             bg-neutral-50 border border-neutral-300 rounded-md shadow-lg overflow-hidden transition-all duration-300 origin-bottom`,
+             bg-neutral-50 border border-neutral-300 rounded-md shadow-lg transition-all duration-300 origin-bottom`,
             {
-              'scale-y-100 opacity-100': searchQuery.length > 0,
-              'scale-y-0 opacity-0 pointer-events-none': !searchQuery.length,
+              'scale-y-100 opacity-100': searchQuery.length >= 1,
+              'scale-y-0 opacity-0 pointer-events-none': searchQuery.length === 0,
             },
           )}
         >

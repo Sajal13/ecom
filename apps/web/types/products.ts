@@ -16,7 +16,6 @@ export interface Review {
   images?: string[];
 }
 
-
 export interface Product {
   id: number;
   title: string;
@@ -32,7 +31,7 @@ export interface Product {
   isNew?: boolean;
   description?: string;
   warrantyInformation?: string;
-  returnPolicy?: string; 
+  returnPolicy?: string;
   images?: string[];
   sku?: string;
   brand?: string;
@@ -56,4 +55,24 @@ export interface Category {
   slug: string;
   name: string;
   url?: string;
+}
+
+export interface CartProduct {
+  id: number;
+  price: number;
+  thumbnail: string;
+  title: string;
+  total: number;
+  discountPercentage: number;
+  discountedTotal?: number;
+  quantity: number;
+}
+
+export interface CartItem {
+  id: number;
+  discountedTotal: number;
+  total: number;
+  totalProducts: number;
+  totalQuantity: number;
+  products: CartProduct[];
 }

@@ -43,7 +43,6 @@ const ProductSlider = ({
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
-  // Handle window resize to update navigation
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -51,14 +50,14 @@ const ProductSlider = ({
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         if (swiperRef.current) {
-          // Update navigation elements
+
           if (swiperRef.current.params.navigation) {
             const navigation = swiperRef.current.params
               .navigation as NavigationOptions;
             navigation.prevEl = navigationPrevRef.current;
             navigation.nextEl = navigationNextRef.current;
           }
-          // Reinitialize navigation
+
           swiperRef.current.navigation?.destroy();
           swiperRef.current.navigation?.init();
           swiperRef.current.navigation?.update();
@@ -82,8 +81,6 @@ const ProductSlider = ({
       navigation.prevEl = navigationPrevRef.current;
       navigation.nextEl = navigationNextRef.current;
     }
-
-    // Initialize navigation after setting refs
     swiper.navigation?.init();
     swiper.navigation?.update();
   };
@@ -164,7 +161,6 @@ const ProductSlider = ({
         }}
         onBeforeInit={handleSwiperInit}
         onResize={(swiper) => {
-          // Update navigation on slide resize
           swiper.navigation?.update();
         }}
         {...rest}

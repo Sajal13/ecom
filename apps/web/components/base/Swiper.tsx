@@ -26,6 +26,8 @@ const Swiper = ({
   paginationClassName,
   children,
   className,
+  modules = [],
+  onBeforeInit,
   ...rest
 }: PropsWithChildren<SwiperProps>) => {
   const paginationRef = useRef<HTMLDivElement | null>(null);
@@ -44,8 +46,34 @@ const Swiper = ({
     'cursor-pointer',
     'z-10',
     'mt-10',
-    paginationClassName
-  )
+    paginationClassName,
+  );
+
+  // Determine if pagination should be shown
+  const showPagination = pagination !== false;
+
+  // Build pagination config
+  const paginationConfig = showPagination
+    ? {
+        el: paginationRef.current,
+        clickable: typeof pagination === 'object' ? pagination.clickable : true,
+        ...(typeof pagination === 'object' ? pagination : {}),
+      }
+    : false;
+
+  const handleBeforeInit = (swiper: any) => {
+    // Call the parent's onBeforeInit first (for navigation setup)
+    if (onBeforeInit) {
+      onBeforeInit(swiper);
+    }
+
+    // Then set up pagination
+    if (swiper.params.pagination && paginationRef.current) {
+      const paginationParams = swiper.params.pagination as PaginationOptions;
+      paginationParams.el = paginationRef.current;
+      paginationParams.clickable = true;
+    }
+  };
 
   return (
     <div
@@ -54,27 +82,19 @@ const Swiper = ({
         className,
       )}
     >
-      {pagination && (
-        <div
-          ref={paginationRef}
-          className={paginationClass}
-        ></div>
+      {showPagination && (
+        <div ref={paginationRef} className={paginationClass}></div>
       )}
       <ReactSwiper
         loop={true}
         centeredSlides={centeredSlides}
-        modules={[Pagination]}
+        modules={modules}
+        pagination={paginationConfig}
         autoplay={{
           delay: 7000,
           disableOnInteraction: false,
         }}
-        onBeforeInit={(swiper) => {
-          if (swiper.params.pagination) {
-            const pagination = swiper.params.pagination as PaginationOptions;
-            pagination.el = paginationRef.current;
-            pagination.clickable = true;
-          }
-        }}
+        onBeforeInit={handleBeforeInit}
         {...rest}
       >
         {children}

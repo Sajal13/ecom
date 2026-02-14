@@ -11,6 +11,7 @@ import Explore from './Explore';
 import FlashSales from './FlashSales';
 import HeroSlider from './HeroSlider';
 import NewArrival from './NewArrival';
+import Highlights from 'components/common/Highlights';
 
 const HomeContainer = async () => {
   const [
@@ -32,7 +33,7 @@ const HomeContainer = async () => {
   ]);
 
   return (
-    <section className="py-10 md:py-16 lg:py-20 container px-6">
+    <section className="">
       <Suspense
         fallback={
           <div className="h-96 md:h-125 w-full bg-neutral-500 rounded-md" />
@@ -47,6 +48,7 @@ const HomeContainer = async () => {
         <Banner highlightedItem={highlightedItem} />
         <Explore products={allProducts.products} />
         <NewArrival newArrivalProducts={newArrival.products} />
+        <Highlights className="md:gap-10" />
       </Suspense>
     </section>
   );

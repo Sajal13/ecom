@@ -1,24 +1,39 @@
 import { cacheLife } from 'next/cache';
-import { GetProduct } from 'types/api';
+import { buildQueryParams } from 'helpers/buildQueryParams';
+import { GetProduct, GetCartItemsOptions } from 'types/api';
 
-export const getProducts = async ({
-  limit,
-  select,
-  skip,
-  q,
-}: Partial<GetProduct> = {}) => {
+export const getProducts = async (options: Partial<GetProduct> = {}) => {
+  'use cache';
+  cacheLife('minutes');
+
+  const queryString = buildQueryParams(options);
+
+  const url = `${process.env.BASE_URL}/products${
+    queryString ? `?${queryString}` : ''
+  }`;
+
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch products!');
+  }
+
+  return res.json();
+};
+
+export const getSearchProducts = async (options: Partial<GetProduct>) => {
   'use cache';
   cacheLife('seconds');
 
-  const params = new URLSearchParams();
+  const queryString = buildQueryParams(options);
 
-  if (limit) params.set('limit', limit.toString());
-  if (skip) params.set('skip', skip.toString());
-  if (select) params.set('select', select.join(','));
-  if (q) params.set('q', q);
-
-  const url = `${process.env.BASE_URL}/products${params.toString() ? `?${params.toString()}` : ''}`;
-
+  const url = `${process.env.BASE_URL}/products/search${
+    queryString ? `?${queryString}` : ''
+  }`;
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +49,7 @@ export const getProducts = async ({
 
 export const getCategories = async () => {
   'use cache';
-  cacheLife('seconds');
+  cacheLife('minutes');
 
   const response = await fetch(`${process.env.BASE_URL}/products/categories`, {
     method: 'GET',
@@ -48,7 +63,7 @@ export const getCategories = async () => {
 
 export const getHighlightedItem = async () => {
   'use cache';
-  cacheLife('seconds');
+  cacheLife('minutes');
 
   const response = await fetch(`${process.env.BASE_URL}/products/1`, {
     method: 'GET',
@@ -62,7 +77,7 @@ export const getHighlightedItem = async () => {
 
 export const getNewArrivalItem = async () => {
   'use cache';
-  cacheLife('seconds');
+  cacheLife('minutes');
 
   const response = await fetch(`${process.env.BASE_URL}/products`, {
     method: 'GET',
@@ -70,5 +85,36 @@ export const getNewArrivalItem = async () => {
       'Content-type': 'application/json',
     },
   });
+  return response.json();
+};
+
+// export const getWishlistProducts = async () => {
+
+// }
+
+export const getCartItems = async ({
+  userId,
+  ...options
+}: GetCartItemsOptions) => {
+  'use cache';
+  cacheLife('minutes');
+
+  const queryString = buildQueryParams(options);
+
+  const url = `${process.env.BASE_URL}/carts/user/${userId}${
+    queryString ? `?${queryString}` : ''
+  }`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch cart items');
+  }
+
   return response.json();
 };

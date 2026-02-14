@@ -16,6 +16,7 @@ export default function AnimatedLink({
   className,
   position = 'left',
   color = 'neutral',
+  ...rest
 }: AnimatedLinkProps) {
   const underlineBaseClass =
     'absolute -bottom-1 h-[1px] w-0 transition-all duration-300 ease-out rounded-xl';
@@ -58,7 +59,7 @@ export default function AnimatedLink({
     underlineColorClass[color],
   );
   return (
-    <Link href={href} className={linkClass}>
+    <Link href={href} className={linkClass} {...rest}>
       {children}
       <span aria-hidden="true" className={underlineClass} />
     </Link>

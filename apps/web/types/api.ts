@@ -4,3 +4,7 @@ export interface GetProduct {
   q?: string;
   select?: string[];
 }
+
+export interface GetCartItemsOptions extends GetProduct {
+  userId: number;
+}

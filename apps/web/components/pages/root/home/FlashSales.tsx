@@ -22,7 +22,7 @@ const FlashSales = ({ flashSlashItems }: FlashSalesProps) => {
           breakpoints={{
             0: { slidesPerView: 1.4 },
             560: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 3 },
             1200: { slidesPerView: 4.3 },
           }}
         >

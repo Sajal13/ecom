@@ -19,11 +19,11 @@ const Explore = ({ products }: ExploreProps) => {
           title="Explore Our Products"
           subTitle="Our Products"
           breakpoints={{
-            0: { slidesPerView: 2 },
-            560: { slidesPerView: 3 },
-            768: { slidesPerView: 3.5 },
-            1200: { slidesPerView: 4.4 },
-            1400: { slidesPerView: 6 },
+            0: { slidesPerView: 1.4 },
+            560: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1200: { slidesPerView: 4.3 },
+            1400: { slidesPerView: 6}
           }}
         >
           {products.map((product) => (

@@ -6,7 +6,7 @@ import OurStory from './OurStory';
 
 const AboutContainer = () => {
   return (
-    <section className="py-10 md:py-16 lg:py-20 container px-6">
+    <section className="">
       <BreadcrumbContainer />
       <OurStory />
       <Info />

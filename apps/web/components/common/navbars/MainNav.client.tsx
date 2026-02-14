@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, Suspense } from 'react';
 import { FaCartShopping } from 'react-icons/fa6';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import Link from 'next/link';
 import classNames from 'classnames';
 import { useNavbar } from 'lib/zustand/useNavbar';
 import { Category } from 'types/products';
@@ -88,9 +89,11 @@ const MainNav = ({ categories }: MainNavProps) => {
 
           {/* Mobile Actions */}
           <div className="flex gap-2 items-center lg:hidden">
-            <Button size="small" color="secondary">
-              <FaCartShopping className="text-xl" />
-            </Button>
+            <Link href="/cart">
+              <Button size="small" color="secondary">
+                <FaCartShopping className="text-xl" />
+              </Button>
+            </Link>
 
             <ThemeTogglerButton />
 

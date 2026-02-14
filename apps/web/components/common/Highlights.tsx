@@ -2,11 +2,17 @@ import React from 'react';
 import classNames from 'classnames';
 import { highlights } from 'data/common';
 import InfoCard from 'components/cards/InfoCard';
+import { twMerge } from 'tailwind-merge';
 
-const Highlights = () => {
+interface HighlightsProps {
+  className?: string;
+}
+
+const Highlights = ({ className }: HighlightsProps) => {
   return (
     <section className="pt-10 md:pt-16 lg:pt-20 container px-6">
-      <div className="flex flex-wrap justify-center items-center gap-4 flex-col md:flex-row">
+      <div className={twMerge(`flex flex-wrap justify-center 
+        items-center gap-4 flex-col md:flex-row`, className)}>
         {highlights.map((highlight) => (
           <InfoCard key={highlight.id} className='max-w-65 bg-transparent hover:bg-neutral-100 p-0'>
             <div className="text-center flex flex-col items-center justify-center">

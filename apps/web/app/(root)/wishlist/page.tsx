@@ -1,9 +1,10 @@
+import WishlistContainer from 'components/pages/root/wishlist'
 import React from 'react'
 
-const WiseList = () => {
+const WishList = () => {
   return (
-    <div>WiseList</div>
+    <WishlistContainer />
   )
 }
 
-export default WiseList
+export default WishList
