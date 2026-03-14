@@ -48,7 +48,7 @@ export const forgotPasswordSchema = z.object({
   emailOrPhone: z
     .string()
     .refine(
-      (value) => z.string().email().safeParse(value).success || BD_PHONE_REGEX.test(value),
+      (value) => z.email().safeParse(value).success || BD_PHONE_REGEX.test(value),
       'Enter a valid email or Bangladeshi phone number',
     ),
 });

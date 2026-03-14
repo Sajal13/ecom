@@ -18,6 +18,7 @@
 
   --h6-font-size: 1.25rem; /* 20px */
   --h6-line-height: 1.4;
+  --checked-bg: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjIuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI2IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik01MzAuOCAxMzQuMUM1NDUuMSAxNDQuNSA1NDguMyAxNjQuNSA1MzcuOSAxNzguOEwyODEuOSA1MzAuOEMyNzYuNCA1MzguNCAyNjcuOSA1NDMuMSAyNTguNSA1NDMuOUMyNDkuMSA1NDQuNyAyNDAgNTQxLjIgMjMzLjQgNTM0LjZMMTA1LjQgNDA2LjZDOTIuOSAzOTQuMSA5Mi45IDM3My44IDEwNS40IDM2MS4zQzExNy45IDM0OC44IDEzOC4yIDM0OC44IDE1MC43IDM2MS4zTDI1Mi4yIDQ2Mi44TDQ4Ni4yIDE0MS4xQzQ5Ni42IDEyNi44IDUxNi42IDEyMy42IDUzMC45IDEzNHoiLz48L3N2Zz4=");
 }
 
 @theme {
@@ -266,6 +267,17 @@ body {
   input[type="number"] {
     &::-webkit-inner-spin-button {
       opacity: 1;
+      width: 10px;
+    }
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    &:checked {
+      background-image: var(--checked-bg);
+      background-size: cover;
+      background-color: var(--color-primary-500);
+      background-position: center;
     }
   }
 }

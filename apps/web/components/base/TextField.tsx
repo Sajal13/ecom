@@ -32,7 +32,7 @@ const TextField = ({
   ...rest
 }: TextFieldProps) => {
   const labelClass = twMerge(
-    classNames('mb-1 text-sm font-medium', labelClassName),
+    classNames('mb-2 text-sm font-medium inline-block', labelClassName),
   );
 
   const inputClass = twMerge(
