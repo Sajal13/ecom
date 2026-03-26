@@ -5,6 +5,8 @@ import CartItems from './CartItems';
 
 const CartContainer = async () => {
   const [cartItems] = await Promise.all([getCartItems({ userId: 33})]);
+
+  console.log(cartItems)
   
   return (
     <section>

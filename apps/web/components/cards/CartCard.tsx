@@ -12,9 +12,11 @@ import TextField from 'components/base/TextField';
 
 interface CartCardProps {
   product: CartProduct;
+  onClick: () => void;
+  onQuantityChange: (quantity: number) => void;
 }
 
-const CartCard = ({ product }: CartCardProps) => {
+const CartCard = ({ product, onClick, onQuantityChange }: CartCardProps) => {
   return (
     <div className="group grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 px-4 lg:px-10 py-6 shadow-lg mb-10 last:mb-0 relative overflow-hidden">
       <div className="flex items-center gap-5">
@@ -26,37 +28,26 @@ const CartCard = ({ product }: CartCardProps) => {
               alt={product.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="rounded-md object-cover"
+              className="rounded-md object-contain"
             />
           </div>
           <AnimatedLink
-            href="/"
+            href={`/product-details/${product.id}`}
             className="text-sm line-clamp-1"
             data-tooltip-target="tooltip-light"
           >
             {product.title}
           </AnimatedLink>
-          <div className="absolute hidden bottom-full z-20 text-nowrap sm:inline-block px-3 py-2 text-sm font-medium  bg-neutral-200 rounded-md shadow-xs transition-all duration-200 opacity-0 group-hover:opacity-100">
-            {product.title}
-          </div>
+          {product.title.length > 20 && (
+            <div className="absolute hidden bottom-full z-20 text-nowrap sm:inline-block px-3 py-2 text-sm font-medium  bg-neutral-200 rounded-md shadow-xs transition-all duration-200 opacity-0 group-hover:opacity-100">
+              {product.title}
+            </div>
+          )}
         </div>
-        {/* <Button
-          color="danger"
-          className="hidden z-10 p-0 hover:bg-transparent group-hover:block absolute -left-5 top-0"
-        >
-          <RiDeleteBin6Line size={16} />
-        </Button> */}
       </div>
       <div className="flex lg:justify-center lg:items-center gap-5">
         <p className="font-medium lg:hidden min-w-20">Price: </p>
         <div className="flex items-center gap-2">
-          {/* {product.discountedTotal && (
-            <p className="text-primary-500 font-medium">
-              {currencyFormat(product.discountedTotal, {
-                maximumFractionDigits: 1,
-              })}
-            </p>
-          )} */}
           <p className={classNames('text-secondary-600 font-medium')}>
             {currencyFormat(product.price, { maximumFractionDigits: 1 })}
           </p>
@@ -67,7 +58,9 @@ const CartCard = ({ product }: CartCardProps) => {
         <TextField
           type="number"
           value={product.quantity}
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e) =>
+            onQuantityChange(Number(e.target.value))
+          }
           className="lg:max-w-16 pe-2"
           rootClassName="justify-center"
         />
@@ -91,9 +84,10 @@ const CartCard = ({ product }: CartCardProps) => {
       </div>
       <div className="absolute right-5 lg:-right-16 max-xl:bottom-5 lg:top-1/2 lg:-translate-y-1/2 group-hover:right-5 transition-all duration-500">
         <Button
-        variant='filled'
+          variant='filled'
           color="danger"
           size='small'
+          onClick={onClick}
         >
           <RiDeleteBin6Line size={16} />
         </Button>

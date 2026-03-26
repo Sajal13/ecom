@@ -1,22 +1,24 @@
+'use client';
+
 import { mainNavItems } from 'data/common';
 import { useNavbar } from 'lib/zustand/useNavbar';
 import AnimatedLink from 'components/base/AnimateLink';
+import { twMerge } from 'tailwind-merge';
 
-const NavItems = () => {
-  const { closeMobileNav } = useNavbar();
+interface NavItemsProps {
+  className?: string;
+}
 
-  const handleLinkClick = () => {
-    if (window.innerWidth < 1024) {
-      closeMobileNav();
-    }
-  };
+const NavItems = ({ className }: NavItemsProps) => {
+  const closeMobileNav = useNavbar((s) => s.closeMobileNav);
+
   return (
-    <ul className="lg:flex lg:items-center lg:gap-4">
+    <ul className={twMerge("lg:flex lg:items-center lg:gap-4", className)}>
       {mainNavItems.map((navItem) => (
-        <li key={navItem.id} className="py-2 px-4" onClick={handleLinkClick}>
+        <li key={navItem.id} className="py-2 px-4" onClick={closeMobileNav}>
           <AnimatedLink
             href={navItem.url}
-            className="text-lg "
+            className="text-lg"
             color="secondary"
             position="center"
           >

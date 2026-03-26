@@ -1,15 +1,29 @@
+'use client';
+
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 import Button from 'components/base/Buttons';
 
 const ThemeTogglerButton = () => {
-  const { theme, setTheme } = useTheme();
-  const handleThemeToggle = () => {
-    theme === 'dark' ? setTheme('light') : setTheme('dark');
-  };
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // only for icon correctness (NOT blocking UI)
+  useEffect(() => setMounted(true), []);
+
+  const isDark = resolvedTheme === 'dark';
+
   return (
-    <Button size="small" shape="circle" color="secondary" onClick={handleThemeToggle}>
-      <span className="text-xl">{theme === 'dark' ? <FaMoon /> : <FaSun />}</span>
+    <Button
+      size="small"
+      shape="circle"
+      color="secondary"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+    >
+      <span className="text-xl">
+        {mounted ? (isDark ? <FaMoon /> : <FaSun />) : <FaSun />}
+      </span>
     </Button>
   );
 };

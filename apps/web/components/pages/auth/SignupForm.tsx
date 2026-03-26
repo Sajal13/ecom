@@ -101,7 +101,7 @@ const SignupForm = () => {
         <AnimatedLink
           href="/login"
           className="text-secondary-900 ml-3"
-          color="bg-secondary-900"
+          color="secondary"
         >
           Log in
         </AnimatedLink>

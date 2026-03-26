@@ -1,17 +1,20 @@
-import React from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { currencyFormat } from 'helpers/utils';
 import Button from 'components/base/Buttons';
 
 interface CartTotalCardProps {
-  subTotal: number;
+  currentCart: number;
+  subtotal: number;
+  amount: number;
   shippingCost: number;
   className?: string;
 }
 
 const CartTotalCard = ({
-  subTotal,
+  currentCart,
+  subtotal,
+  amount,
   shippingCost,
   className,
 }: CartTotalCardProps) => {
@@ -23,29 +26,24 @@ const CartTotalCard = ({
       )}
     >
       <h6 className="mb-3">Cart Total</h6>
-      <div className="py-4 flex justify-between items-center border-b border-b-neutral-500">
+
+      <div className="py-4 flex justify-between border-b">
         <p>SubTotal</p>
-        <p>{currencyFormat(subTotal, { maximumFractionDigits: 1 })}</p>
+        <p>{currencyFormat(subtotal)}</p>
       </div>
-      <div className="py-4 flex justify-between items-center border-b border-b-neutral-500">
+
+      <div className="py-4 flex justify-between border-b">
         <p>Shipping</p>
-        <p>
-          {shippingCost === 0
-            ? 'Free'
-            : currencyFormat(subTotal, { maximumFractionDigits: 1 })}
-        </p>
+        <p>{shippingCost === 0 ? 'Free' : currencyFormat(shippingCost)}</p>
       </div>
-      <div className="py-4 flex justify-between items-center mb-6">
+
+      <div className="py-4 flex justify-between mb-6">
         <p>Total</p>
-        <p>
-          {currencyFormat(
-            shippingCost > 0 ? subTotal + shippingCost : subTotal,
-            { maximumFractionDigits: 1 },
-          )}
-        </p>
+        <p>{currencyFormat(amount)}</p>
       </div>
+
       <div className="flex justify-center">
-        <Link href="/checkout">
+        <Link href={`/checkout/${currentCart}`}>
           <Button variant="filled" color="primary">
             Proceed To Checkout
           </Button>

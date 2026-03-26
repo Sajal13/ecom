@@ -75,4 +75,5 @@ export interface CartItem {
   totalProducts: number;
   totalQuantity: number;
   products: CartProduct[];
+  shippingCost?: number;
 }

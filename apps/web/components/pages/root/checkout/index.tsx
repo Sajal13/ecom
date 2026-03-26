@@ -1,4 +1,3 @@
-import React from 'react';
 import BreadcrumbContainer from 'components/common/BreadcrumbContainer';
 import BillingDetails from './BillingDetails';
 

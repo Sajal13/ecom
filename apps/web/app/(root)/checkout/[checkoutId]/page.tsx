@@ -1,7 +1,13 @@
 import React from 'react';
 import CheckoutContainer from 'components/pages/root/checkout';
 
-const page = () => {
+interface Props {
+  params: Promise<{checkoutId: string}>
+}
+
+const page = async ({ params }: Props) => {
+  const { checkoutId } = await params;
+
   return <CheckoutContainer />;
 };
 

@@ -6,7 +6,7 @@ import Button from 'components/base/Buttons';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="min-h-screen container px-6 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
+    <main className="min-h-screen grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
       <section className="w-full hidden md:block">
         <Image
           src={Background1}
